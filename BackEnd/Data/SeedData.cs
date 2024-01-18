@@ -34,31 +34,37 @@ public static class SeedData
         }
         Employe employe1 = new Employe
         {
+            Id = 1,
             Nom = "Goy",
             Prenom = "Clement",
             Email = "cgoy001@ensc.fr",
+            MotDePasse = "cgoy001alensc",
             Statut = StatutEmploye.Manager,
             Pole = PoleEntreprise.Logistique,
         };
         Employe employe2 = new Employe
         {
+            Id = 2,
             Nom = "Dupont",
             Prenom = "François",
             Email = "dfrancois@ensc.fr",
+            MotDePasse = "cfw156lm",
             Statut = StatutEmploye.MembreEquipe,
             Pole = PoleEntreprise.Logistique,
         };
         Employe employe3 = new Employe
         {
+            Id = 3,
             Nom = "Valleran",
             Prenom = "Sebastien",
             Email = "svalleran002@ensc.fr",
+            MotDePasse = "jmwd151413",
             Statut = StatutEmploye.MembreEquipe,
             Pole = PoleEntreprise.Logistique,
         };
 
         context.AddRange(employe1, employe2, employe3);
-        
+
         context.SaveChanges();
     }
 

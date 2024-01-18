@@ -7,6 +7,7 @@ public class Tache
     public Tache() { }
     public Tache(TacheDTO tacheDTO, BackendContext context)
     {
+        Id = tacheDTO.Id;
         Duree = tacheDTO.Duree;
         Description = tacheDTO.Description;
         Echeance = tacheDTO.Echeance;

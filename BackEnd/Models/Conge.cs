@@ -7,6 +7,7 @@ public class Conge
     public Conge() { }
     public Conge(CongeDTO congeDTO, BackendContext context)
     {
+        Id = congeDTO.Id;
         IdEmploye = congeDTO.IdEmploye;
         Duree = congeDTO.Duree;
         Date = congeDTO.Date;

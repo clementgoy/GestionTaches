@@ -7,6 +7,7 @@ public class Assignation
     public Assignation() { }
     public Assignation(AssignationDTO assignationDTO, BackendContext context)
     {
+        Id = assignationDTO.Id;
         IdEmploye = assignationDTO.IdEmploye;
         IdTache = assignationDTO.IdTache;
         Message = assignationDTO.Message;

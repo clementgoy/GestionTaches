@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "G3w/sIznsUaf4uiyQuGbNPEfA4bHVkPQaZzAxFxczaFLMfh3Q58CGs3hiOzC+IOkoO846h4f4YYJHubhFTdpgA==",
+  "dgSpecHash": "wneGvOKfC3y8d2a3OeiAPcN1JVRgh1kS+jrtVSiPBtX0cfdARWY4KJOor20VgLDIjN0d5V1CQArI7TXTkdtSYA==",
   "success": true,
   "projectFilePath": "C:\\Users\\clem7\\OneDrive\\Documents\\ENSC\\Projets\\PII\\GestionTaches\\BackEnd\\BackEnd.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\clem7\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\clem7\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\clem7\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.0\\microsoft.aspnetcore.openapi.8.0.0.nupkg.sha512",
     "C:\\Users\\clem7\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",

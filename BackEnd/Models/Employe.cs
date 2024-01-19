@@ -1,10 +1,12 @@
+using BCrypt.Net;
+
 public class Employe
 {
     public int Id { get; set; }
     public string Nom { get; set; }
     public string Prenom { get; set; }
     public string Email { get; set; }
-    internal string MotDePasse { get; set; } = null!;
+    internal string MotDePasseHash { get; set; } = null!;
     public StatutEmploye Statut { get; set; }
     public PoleEntreprise Pole { get; set; }
     public Employe() { }
@@ -23,7 +25,8 @@ public class Employe
     {
         if (IsMotDePasseValid(motDePasse))
         {
-            MotDePasse = motDePasse;
+            // Hacher le mot de passe avant de le stocker
+            MotDePasseHash = BCrypt.Net.BCrypt.HashPassword(motDePasse);
         }
         else
         {

@@ -38,7 +38,7 @@ public static class SeedData
             Nom = "Goy",
             Prenom = "Clement",
             Email = "cgoy001@ensc.fr",
-            MotDePasse = "cgoy001alensc",
+            MotDePasseHash = BCrypt.Net.BCrypt.HashPassword("cgoy001alensc"),
             Statut = StatutEmploye.Manager,
             Pole = PoleEntreprise.Logistique,
         };
@@ -48,7 +48,7 @@ public static class SeedData
             Nom = "Dupont",
             Prenom = "François",
             Email = "dfrancois@ensc.fr",
-            MotDePasse = "cfw156lm",
+            MotDePasseHash = BCrypt.Net.BCrypt.HashPassword("cfw156lm"),
             Statut = StatutEmploye.MembreEquipe,
             Pole = PoleEntreprise.Logistique,
         };
@@ -58,7 +58,7 @@ public static class SeedData
             Nom = "Valleran",
             Prenom = "Sebastien",
             Email = "svalleran002@ensc.fr",
-            MotDePasse = "jmwd151413",
+            MotDePasseHash = BCrypt.Net.BCrypt.HashPassword("jmwd151413"),
             Statut = StatutEmploye.MembreEquipe,
             Pole = PoleEntreprise.Logistique,
         };

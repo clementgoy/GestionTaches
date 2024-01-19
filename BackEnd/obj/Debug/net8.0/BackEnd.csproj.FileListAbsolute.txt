@@ -127,3 +127,4 @@ C:\Users\clem7\OneDrive\Documents\ENSC\Projets\PII\GestionTaches\BackEnd\obj\Deb
 C:\Users\clem7\OneDrive\Documents\ENSC\Projets\PII\GestionTaches\BackEnd\obj\Debug\net8.0\BackEnd.pdb
 C:\Users\clem7\OneDrive\Documents\ENSC\Projets\PII\GestionTaches\BackEnd\obj\Debug\net8.0\BackEnd.genruntimeconfig.cache
 C:\Users\clem7\OneDrive\Documents\ENSC\Projets\PII\GestionTaches\BackEnd\obj\Debug\net8.0\ref\BackEnd.dll
+C:\Users\clem7\OneDrive\Documents\ENSC\Projets\PII\GestionTaches\BackEnd\bin\Debug\net8.0\BCrypt.Net-Next.dll

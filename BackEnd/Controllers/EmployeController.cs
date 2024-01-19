@@ -51,14 +51,11 @@ public class EmployeController : ControllerBase
 
         return CreatedAtAction(nameof(GetEmploye), new { id = employe.Id }, new EmployeDTO(employe));
     }
-
     private bool IsMotDePasseValid(string motDePasse)
     {
         // Exemple de validation : Au moins un caractère et un chiffre
         return !string.IsNullOrWhiteSpace(motDePasse) && motDePasse.Any(char.IsLetter) && motDePasse.Any(char.IsDigit);
     }
-
-
 
     // DELETE: api/delete/2
     [HttpDelete("{id}")]
@@ -74,4 +71,43 @@ public class EmployeController : ControllerBase
 
         return NoContent();
     }
+
+    // PUT: api/employe/2
+    [HttpPut("{id}")]
+    public async Task<IActionResult> PutEmploye(int id, EmployeDTO employeDTO)
+    {
+        if (id != employeDTO.Id)
+            return BadRequest();
+
+        // Récupérer l'employé existant
+        Employe existingEmploye = await _context.Employes.FindAsync(id);
+
+        if (existingEmploye == null)
+            return NotFound();
+
+        // Mise à jour des autres propriétés sans toucher au mot de passe
+        existingEmploye.Nom = employeDTO.Nom;
+        existingEmploye.Prenom = employeDTO.Prenom;
+        existingEmploye.Email = employeDTO.Email;
+        existingEmploye.SetStatut(employeDTO.Statut);
+        existingEmploye.SetPole(employeDTO.Pole);
+
+        // Mettre à jour l'employé dans le contexte et sauvegarder les modifications
+        _context.Entry(existingEmploye).State = EntityState.Modified;
+
+        try
+        {
+            await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!_context.Employes.Any(m => m.Id == id))
+                return NotFound();
+            else
+                throw;
+        }
+
+        return NoContent();
+    }
+
 }

@@ -33,6 +33,28 @@ public class EmployeController : ControllerBase
         return new EmployeDTO(employe);
     }
 
+    // GET : api/employe/3
+    [HttpGet("byTache/{idTache}")]
+    public async Task<ActionResult<IEnumerable<EmployeDTO>>> GetEmployesByTacheId(int idTache)
+    {
+        var affectations = await _context.Assignations
+            .Where(a => a.IdTache == idTache)
+            .ToListAsync();
+
+        if (affectations == null || affectations.Count == 0)
+            return NotFound();
+
+        var employes = await _context.Employes
+            .Where(e => affectations.Any(a => a.IdEmploye == e.Id))
+            .ToListAsync();
+
+        if (employes == null || employes.Count == 0)
+            return NotFound();
+
+        return employes.Select(e => new EmployeDTO(e)).ToList();
+    }
+
+
     // POST: api/employe
     [HttpPost]
     public async Task<ActionResult<Employe>> PostEmploye(EmployeDTO employeDTO)

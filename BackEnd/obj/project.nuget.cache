@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "wneGvOKfC3y8d2a3OeiAPcN1JVRgh1kS+jrtVSiPBtX0cfdARWY4KJOor20VgLDIjN0d5V1CQArI7TXTkdtSYA==",
+  "dgSpecHash": "3cwhQ3I9NTifRzIBO6sYQM2cGc0FhHtxXWCAE6kyv0dL5lM79t/bT5ETurlYwd3fG+fankH5Ar/3wJsEyrpftA==",
   "success": true,
   "projectFilePath": "C:\\Users\\clem7\\OneDrive\\Documents\\ENSC\\Projets\\PII\\GestionTaches\\BackEnd\\BackEnd.csproj",
   "expectedPackageFiles": [
@@ -34,6 +34,7 @@
     "C:\\Users\\clem7\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512",
     "C:\\Users\\clem7\\.nuget\\packages\\microsoft.openapi\\1.4.3\\microsoft.openapi.1.4.3.nupkg.sha512",
     "C:\\Users\\clem7\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "C:\\Users\\clem7\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\clem7\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.1.6\\sqlitepclraw.bundle_e_sqlite3.2.1.6.nupkg.sha512",
     "C:\\Users\\clem7\\.nuget\\packages\\sqlitepclraw.core\\2.1.6\\sqlitepclraw.core.2.1.6.nupkg.sha512",
     "C:\\Users\\clem7\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.1.6\\sqlitepclraw.lib.e_sqlite3.2.1.6.nupkg.sha512",

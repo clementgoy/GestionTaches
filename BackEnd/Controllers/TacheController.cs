@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
 
 
 [ApiController]
@@ -12,6 +13,7 @@ public class TacheController : ControllerBase
         _context = context;
     }
 
+
     // GET: api/tache
     [HttpGet]
     public async Task<ActionResult<IEnumerable<TacheDTO>>> GetTaches()
@@ -20,8 +22,9 @@ public class TacheController : ControllerBase
         return await taches.ToListAsync();
     }
 
+
     // GET: api/tache/2
-    [HttpGet("{id}")]
+    [HttpGet("tache/{id}")]
     public async Task<ActionResult<TacheDTO>> GetTache(int id)
     {
         var tache = await _context.Taches.SingleOrDefaultAsync(t => t.Id == id);
@@ -32,25 +35,102 @@ public class TacheController : ControllerBase
         return new TacheDTO(tache);
     }
 
-    // GET : api/tache/3
+
+    // GET : api/taches/byEmploye/3
     [HttpGet("byEmploye/{idEmploye}")]
-    public async Task<ActionResult<IEnumerable<TacheDTO>>> GetEmployesByEmployeId(int idEmploye)
+    public async Task<ActionResult<IEnumerable<TacheDTO>>> GetTachesByEmployeId(int idEmploye)
     {
-        var affectations = await _context.Assignations
-            .Where(a => a.IdEmploye == idEmploye)
+        var hashedIdEmploye = HashId(idEmploye);
+
+        var assignations = await _context.Assignations
+            .Where(a => a.HashedIdEmploye == hashedIdEmploye)
             .ToListAsync();
 
-        if (affectations == null || affectations.Count == 0)
+        if (assignations == null || assignations.Count == 0)
             return NotFound();
 
+        var tacheIds = assignations.Select(a => a.HashedIdTache).ToList();
+
         var taches = await _context.Taches
-            .Where(t => affectations.Any(a => a.IdTache == t.Id))
+            .Where(t => tacheIds.Contains(HashId(t.Id)))
             .ToListAsync();
 
         if (taches == null || taches.Count == 0)
             return NotFound();
 
         return taches.Select(t => new TacheDTO(t)).ToList();
+    }
+
+
+    // POST: api/tache
+    [HttpPost]
+    public async Task<ActionResult<Tache>> PostTache(TacheDTO tacheDTO)
+    {
+        Tache tache = new Tache(tacheDTO, _context);
+
+        _context.Taches.Add(tache);
+        await _context.SaveChangesAsync();
+
+        return CreatedAtAction(nameof(GetTache), new { id = tache.Id }, new TacheDTO(tache));
+    }
+
+
+    // DELETE: api/taches/2
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteTache(int id)
+    {
+        var hashedIdTache = HashId(id);
+        var tache = await _context.Taches.FindAsync(id);
+
+        if (tache == null)
+            return NotFound();
+
+        var assignations = _context.Assignations.Where(a => a.HashedIdTache == hashedIdTache);
+        _context.Assignations.RemoveRange(assignations);
+
+        _context.Taches.Remove(tache);
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+    }
+
+
+    // PUT: api/tache/2
+    [HttpPut("{id}")]
+    public async Task<IActionResult> PutTache(int id, TacheDTO tacheDTO)
+    {
+        if (id != tacheDTO.Id)
+            return BadRequest();
+
+        Tache existingTache = await _context.Taches.FindAsync(id);
+
+        if (existingTache == null)
+            return NotFound();
+
+        _context.Entry(existingTache).State = EntityState.Modified;
+
+        try
+        {
+            await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!_context.Taches.Any(m => m.Id == id))
+                return NotFound();
+            else
+                throw;
+        }
+
+        return NoContent();
+    }
+
+    private string HashId(int id)
+    {
+        using (var sha256 = System.Security.Cryptography.SHA256.Create())
+        {
+            byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(id.ToString()));
+            return Convert.ToBase64String(hashedBytes);
+        }
     }
 
 }

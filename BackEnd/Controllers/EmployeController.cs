@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
 
 
 [ApiController]
@@ -33,19 +34,23 @@ public class EmployeController : ControllerBase
         return new EmployeDTO(employe);
     }
 
-    // GET : api/employe/3
+    // GET : api/employes/byTache/3
     [HttpGet("byTache/{idTache}")]
     public async Task<ActionResult<IEnumerable<EmployeDTO>>> GetEmployesByTacheId(int idTache)
     {
-        var affectations = await _context.Assignations
-            .Where(a => a.IdTache == idTache)
+        var hashedIdTache = HashId(idTache);
+
+        var assignations = await _context.Assignations
+            .Where(a => a.HashedIdTache == hashedIdTache)
             .ToListAsync();
 
-        if (affectations == null || affectations.Count == 0)
+        if (assignations == null || assignations.Count == 0)
             return NotFound();
 
+        var employeIds = assignations.Select(a => a.HashedIdEmploye).ToList();
+
         var employes = await _context.Employes
-            .Where(e => affectations.Any(a => a.IdEmploye == e.Id))
+            .Where(e => employeIds.Contains(HashId(e.Id)))
             .ToListAsync();
 
         if (employes == null || employes.Count == 0)
@@ -79,20 +84,27 @@ public class EmployeController : ControllerBase
         return !string.IsNullOrWhiteSpace(motDePasse) && motDePasse.Any(char.IsLetter) && motDePasse.Any(char.IsDigit);
     }
 
-    // DELETE: api/delete/2
+
+    // DELETE: api/employes/2
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteEmployeItem(int id)
     {
+        var hashedIdEmploye = HashId(id);
+
         var employe = await _context.Employes.FindAsync(id);
 
         if (employe == null)
             return NotFound();
+
+        var assignations = _context.Assignations.Where(a => a.HashedIdEmploye == hashedIdEmploye);
+        _context.Assignations.RemoveRange(assignations);
 
         _context.Employes.Remove(employe);
         await _context.SaveChangesAsync();
 
         return NoContent();
     }
+
 
     // PUT: api/employe/2
     [HttpPut("{id}")]
@@ -130,6 +142,15 @@ public class EmployeController : ControllerBase
         }
 
         return NoContent();
+    }
+
+    private string HashId(int id)
+    {
+        using (var sha256 = System.Security.Cryptography.SHA256.Create())
+        {
+            byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(id.ToString()));
+            return Convert.ToBase64String(hashedBytes);
+        }
     }
 
 }

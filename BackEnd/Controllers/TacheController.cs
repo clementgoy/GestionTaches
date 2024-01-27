@@ -14,7 +14,7 @@ public class TacheController : ControllerBase
     }
 
 
-    // GET: api/tache
+    // GET: api/taches
     [HttpGet]
     public async Task<ActionResult<IEnumerable<TacheDTO>>> GetTaches()
     {
@@ -24,7 +24,7 @@ public class TacheController : ControllerBase
 
 
     // GET: api/tache/2
-    [HttpGet("tache/{id}")]
+    [HttpGet("{id}")]
     public async Task<ActionResult<TacheDTO>> GetTache(int id)
     {
         var tache = await _context.Taches.SingleOrDefaultAsync(t => t.Id == id);

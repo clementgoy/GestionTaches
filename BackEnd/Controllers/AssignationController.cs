@@ -39,6 +39,7 @@ public class AssignationController : ControllerBase
         return new AssignationDTO(assignation);
     }
 
+
     // POST: api/assignation
     [HttpPost]
     public async Task<ActionResult<AssignationDTO>> PostAssignation(AssignationDTO assignationDTO)
@@ -60,7 +61,8 @@ public class AssignationController : ControllerBase
         return CreatedAtAction(nameof(GetAssignation), new { id = assignation.Id }, new AssignationDTO(assignation));
     }
 
-    // PUT: api/assignation/1
+
+    // PUT: api/assignation
     [HttpPut("{id}")]
     public async Task<IActionResult> PutAssignation(int id, AssignationDTO assignationDTO)
     {
@@ -107,7 +109,7 @@ public class AssignationController : ControllerBase
         return NoContent();
     }
 
-    // DELETE: api/assignation/1
+    // DELETE: api/assignation
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAssignation(int id)
     {

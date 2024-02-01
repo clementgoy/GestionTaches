@@ -59,6 +59,18 @@ public class EmployeController : ControllerBase
         return employes.Select(e => new EmployeDTO(e)).ToList();
     }
 
+    // GET: api/employe/byEmail/2
+    [HttpGet("byEmail{email}")]
+    public async Task<ActionResult<EmployeDTO>> GetEmployeByEmail(string email)
+    {
+        var employe = await _context.Employes.SingleOrDefaultAsync(e => e.Email == email);
+
+        if (employe == null)
+            return NotFound();
+
+        return new EmployeDTO(employe);
+    }
+
 
     // POST: api/employe
     [HttpPost]

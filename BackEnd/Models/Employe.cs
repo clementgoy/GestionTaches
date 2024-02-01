@@ -7,8 +7,9 @@ public class Employe
     public string Prenom { get; set; }
     public string Email { get; set; }
     internal string MotDePasseHash { get; set; } = null!;
-    public string ResetPasswordToken { get; set; } = null!;
-    public DateTime? ResetPasswordTokenExpiration { get; set; }
+    internal string JetonConnection{ get; set; } = null!;
+    public string ReinitialiserMDPJeton { get; set; } = null!;
+    public DateTime? ReinitialiserMDPJetonExpiration { get; set; }
     public StatutEmploye Statut { get; set; }
     public PoleEntreprise Pole { get; set; }
     public Employe() { }
@@ -19,8 +20,9 @@ public class Employe
         Prenom = employeDTO.Prenom;
         Email = employeDTO.Email;
         SetMotDePasse(employeDTO.MotDePasse);
-        ResetPasswordToken = employeDTO.ResetPasswordToken;
-        ResetPasswordTokenExpiration = employeDTO.ResetPasswordTokenExpiration;
+        MotDePasseHash = employeDTO.MotDePasseHash;
+        ReinitialiserMDPJeton = employeDTO.ReinitialiserMDPJeton;
+        ReinitialiserMDPJetonExpiration = employeDTO.ReinitialiserMDPJetonExpiration;
         SetStatut(employeDTO.Statut);
         SetPole(employeDTO.Pole);
     }

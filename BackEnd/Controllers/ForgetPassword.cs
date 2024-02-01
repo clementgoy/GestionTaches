@@ -21,9 +21,9 @@ public class ForgetPasswordController : ControllerBase
         try
         {
             // Vérifier si le token est valide
-            var employe = _context.Employes.FirstOrDefault(e => e.ResetPasswordToken == model.Token);
+            var employe = _context.Employes.FirstOrDefault(e => e.ReinitialiserMDPJeton == model.Token);
 
-            if (employe == null || TokenHasExpired(employe.ResetPasswordTokenExpiration))
+            if (employe == null || TokenHasExpired(employe.ReinitialiserMDPJetonExpiration))
             {
                 // Jeton non trouvé ou expiré
                 return BadRequest(new { message = "Token invalide ou expiré." });
@@ -40,8 +40,8 @@ public class ForgetPasswordController : ControllerBase
             employe.SetMotDePasse(model.Password);
 
             // Effacer le token de réinitialisation
-            employe.ResetPasswordToken = null;
-            employe.ResetPasswordTokenExpiration = null;
+            employe.ReinitialiserMDPJeton = null;
+            employe.ReinitialiserMDPJetonExpiration = null;
 
             // Supprimer le mot de passe du modèle
             model.Password = null;

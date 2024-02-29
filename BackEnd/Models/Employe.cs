@@ -6,10 +6,10 @@ public class Employe
     public string Nom { get; set; }
     public string Prenom { get; set; }
     public string Email { get; set; }
-    internal string MotDePasseHash { get; set; } = null!;
-    internal string JetonConnection{ get; set; } = null!;
-    public string ReinitialiserMDPJeton { get; set; } = null!;
-    public DateTime? ReinitialiserMDPJetonExpiration { get; set; }
+    public string MotDePasseHash { get; set; } = null!;
+    internal string JetonConnection { get; set; } = null!;
+    internal string ReinitialiserMDPJeton { get; set; } = null!;
+    internal DateTime? ReinitialiserMDPJetonExpiration { get; set; }
     public StatutEmploye Statut { get; set; }
     public PoleEntreprise Pole { get; set; }
     public Employe() { }

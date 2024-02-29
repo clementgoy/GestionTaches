@@ -1,51 +1,52 @@
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json.Linq;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 
-
+[Route("api/[controller]")]
 [ApiController]
-[Route("api/auth")]
 public class AuthentificationController : ControllerBase
 {
     private readonly BackendContext _context;
+    private readonly IConfiguration _configuration;
 
-    public AuthentificationController(BackendContext context)
+    public AuthentificationController(BackendContext context, IConfiguration configuration)
     {
         _context = context;
+        _configuration = configuration;
     }
 
     [HttpPost("login")]
-    public async Task<IActionResult> Connexion([FromBody] JObject donneesRequête)
+    public async Task<IActionResult> Connexion([FromBody] AuthentificationRequest request)
     {
-        string courriel = donneesRequête.GetValue("courriel")?.ToString();
-        string motDePasse = donneesRequête.GetValue("motDePasse")?.ToString();
+        var utilisateur = await _context.Employes.FirstOrDefaultAsync(u => u.Email == request.Email);
 
-        // Utilisez 'await' ici pour attendre le résultat de la méthode asynchrone
-        if (await InformationsConnexionValides(courriel, motDePasse))
+        if (utilisateur == null || !BCrypt.Net.BCrypt.Verify(request.Password, utilisateur.MotDePasseHash))
         {
-            // Authentification réussie
-            return Ok(new { message = "Authentification réussie" });
-        }
-        else
-        {
-            // Authentification échouée
-            return Unauthorized(new { message = "Courriel ou mot de passe incorrect" });
-        }
-    }
-
-    private async Task<bool> InformationsConnexionValides(string courriel, string motDePasse)
-    {
-        EmployeController employeController = new EmployeController(_context);
-
-        // Appel de la méthode GetEmployeByEmail de manière asynchrone
-        var employeResult = await employeController.GetEmployeByEmail(courriel);
-
-        if (employeResult != null && employeResult.Value != null)
-        {
-            EmployeDTO employe = employeResult.Value;
-            return BCrypt.Net.BCrypt.Verify(motDePasse, employe.MotDePasseHash);
+            return Unauthorized("Email ou mot de passe incorrect");
         }
 
-        return false;
+        // Générer le token JWT
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]);
+        var tokenDescriptor = new SecurityTokenDescriptor
+        {
+            Subject = new ClaimsIdentity(new Claim[]
+            {
+                new Claim(ClaimTypes.Name, utilisateur.Email)
+            }),
+            Expires = DateTime.UtcNow.AddHours(2), 
+            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+        };
+
+        var token = tokenHandler.CreateToken(tokenDescriptor);
+        var tokenString = tokenHandler.WriteToken(token);
+
+        return Ok(new { Token = tokenString });
     }
 }

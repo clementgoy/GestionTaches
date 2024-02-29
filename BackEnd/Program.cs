@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 var builder = WebApplication.CreateBuilder(args);
 
+SeedData.Init();
+
 // Add services to the container.
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -11,7 +13,7 @@ builder.Services.AddDbContext<BackendContext>();
 
 var app = builder.Build();
 
-SeedData.Init();
+
 
 
 // Configure the HTTP request pipeline.

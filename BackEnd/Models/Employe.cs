@@ -8,8 +8,8 @@ public class Employe
     public string Email { get; set; }
     public string MotDePasseHash { get; set; } = null!;
     internal string JetonConnection { get; set; } = null!;
-    internal string ReinitialiserMDPJeton { get; set; } = null!;
-    internal DateTime? ReinitialiserMDPJetonExpiration { get; set; }
+    public string ResetToken { get; set; }
+    public DateTime? ResetTokenExpires { get; set; }
     public StatutEmploye Statut { get; set; }
     public PoleEntreprise Pole { get; set; }
     public Employe() { }
@@ -21,8 +21,8 @@ public class Employe
         Email = employeDTO.Email;
         SetMotDePasse(employeDTO.MotDePasse);
         MotDePasseHash = employeDTO.MotDePasseHash;
-        ReinitialiserMDPJeton = employeDTO.ReinitialiserMDPJeton;
-        ReinitialiserMDPJetonExpiration = employeDTO.ReinitialiserMDPJetonExpiration;
+        ResetToken = employeDTO.ResetToken;
+        ResetTokenExpires = employeDTO.ResetTokenExpires;
         SetStatut(employeDTO.Statut);
         SetPole(employeDTO.Pole);
     }
@@ -32,7 +32,8 @@ public class Employe
         if (IsMotDePasseValid(motDePasse))
         {
             // Hacher le mot de passe avant de le stocker
-            MotDePasseHash = BCrypt.Net.BCrypt.HashPassword(motDePasse);
+            this.MotDePasseHash = BCrypt.Net.BCrypt.HashPassword(motDePasse);
+
         }
         else
         {

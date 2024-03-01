@@ -1,4 +1,4 @@
-# gestion-taches-vue
+# nom-du-projet
 
 ## Project setup
 ```

@@ -43,6 +43,8 @@ public static class SeedData
             Email = "cgoy001@ensc.fr",
             Statut = StatutEmploye.Manager,
             Pole = PoleEntreprise.Logistique,
+            ResetToken = "",
+            ResetTokenExpires = DateTime.Parse("2024-03-02"),
         };
         employe1.SetMotDePasse("cg1");
         Employe employe2 = new Employe
@@ -53,6 +55,8 @@ public static class SeedData
             Email = "dfrancois@ensc.fr",
             Statut = StatutEmploye.MembreEquipe,
             Pole = PoleEntreprise.Logistique,
+            ResetToken = "",
+            ResetTokenExpires = DateTime.Parse("2024-03-02"),
         };
         employe2.SetMotDePasse("cfw156lm");
         Employe employe3 = new Employe
@@ -64,6 +68,8 @@ public static class SeedData
             MotDePasseHash = BCrypt.Net.BCrypt.HashPassword("jmwd151413"),
             Statut = StatutEmploye.MembreEquipe,
             Pole = PoleEntreprise.Logistique,
+            ResetToken = "",
+            ResetTokenExpires = DateTime.Parse("2024-03-02"),
         };
         employe3.SetMotDePasse("jmwd151413");
 

@@ -6,8 +6,8 @@ public class EmployeDTO
     public string Email { get; set; }
     public string MotDePasse { get; set; }
     public string MotDePasseHash { get; set; }
-    public string ReinitialiserMDPJeton { get; set; }
-    public DateTime? ReinitialiserMDPJetonExpiration { get; set; }
+    public string ResetToken { get; set; }
+    public DateTime? ResetTokenExpires { get; set; }
     public string Statut { get; set; }
     public string Pole { get; set; }
 
@@ -20,8 +20,8 @@ public class EmployeDTO
         Prenom = employe.Prenom;
         Email = employe.Email;
         MotDePasseHash = employe.MotDePasseHash;
-        ReinitialiserMDPJeton = employe.ReinitialiserMDPJeton;
-        ReinitialiserMDPJetonExpiration = employe.ReinitialiserMDPJetonExpiration;
+        ResetToken = employe.ResetToken;
+        ResetTokenExpires = employe.ResetTokenExpires;
         Statut = employe.Statut.ToString();
         Pole = employe.Pole.ToString();
     }

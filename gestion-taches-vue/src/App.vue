@@ -1,20 +1,12 @@
-<!-- src/App.vue -->
 <template>
-  <div id="app">
-    <ListeTaches />
-  </div>
+  <img alt="Vue logo" src="./assets/logo.png">
+  <router-view></router-view>
 </template>
 
 <script>
-import ListeTaches from '@/components/ListeTaches.vue';
-
-
 export default {
-  name: 'App',
-  components: {
-    ListeTaches,
-  },
-};
+  name: 'App'
+}
 </script>
 
 <style>
@@ -27,4 +19,3 @@ export default {
   margin-top: 60px;
 }
 </style>
-

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\clem7\\OneDrive\\Documents\\ENSC\\Projets\\PII\\P2Ibordel\\GestionTaches\\BackEnd\\BackEnd.csproj": {}
+    "C:\\Users\\clem7\\OneDrive\\Documents\\ENSC\\Projets\\PII\\GestionTaches\\BackEnd\\BackEnd.csproj": {}
   },
   "projects": {
-    "C:\\Users\\clem7\\OneDrive\\Documents\\ENSC\\Projets\\PII\\P2Ibordel\\GestionTaches\\BackEnd\\BackEnd.csproj": {
+    "C:\\Users\\clem7\\OneDrive\\Documents\\ENSC\\Projets\\PII\\GestionTaches\\BackEnd\\BackEnd.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\clem7\\OneDrive\\Documents\\ENSC\\Projets\\PII\\P2Ibordel\\GestionTaches\\BackEnd\\BackEnd.csproj",
+        "projectUniqueName": "C:\\Users\\clem7\\OneDrive\\Documents\\ENSC\\Projets\\PII\\GestionTaches\\BackEnd\\BackEnd.csproj",
         "projectName": "BackEnd",
-        "projectPath": "C:\\Users\\clem7\\OneDrive\\Documents\\ENSC\\Projets\\PII\\P2Ibordel\\GestionTaches\\BackEnd\\BackEnd.csproj",
+        "projectPath": "C:\\Users\\clem7\\OneDrive\\Documents\\ENSC\\Projets\\PII\\GestionTaches\\BackEnd\\BackEnd.csproj",
         "packagesPath": "C:\\Users\\clem7\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\clem7\\OneDrive\\Documents\\ENSC\\Projets\\PII\\P2Ibordel\\GestionTaches\\BackEnd\\obj\\",
+        "outputPath": "C:\\Users\\clem7\\OneDrive\\Documents\\ENSC\\Projets\\PII\\GestionTaches\\BackEnd\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\clem7\\AppData\\Roaming\\NuGet\\NuGet.Config",

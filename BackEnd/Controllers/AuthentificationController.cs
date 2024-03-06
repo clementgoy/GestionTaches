@@ -24,6 +24,11 @@ public class AuthentificationController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Connexion([FromBody] AuthentificationRequest request)
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
         var utilisateur = await _context.Employes.FirstOrDefaultAsync(u => u.Email == request.Email);
 
         if (utilisateur == null || !BCrypt.Net.BCrypt.Verify(request.Password, utilisateur.MotDePasseHash))

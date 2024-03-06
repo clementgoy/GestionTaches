@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BackEnd.Migrations
 {
     [DbContext(typeof(BackendContext))]
-    partial class BackendContextModelSnapshot : ModelSnapshot
+    [Migration("20240304075725_MoreThingsInTheDB")]
+    partial class MoreThingsInTheDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.1");
@@ -21,14 +24,6 @@ namespace BackEnd.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("HashedIdEmploye")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("HashedIdTache")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
 
                     b.Property<string>("Message")
                         .IsRequired()
@@ -51,13 +46,8 @@ namespace BackEnd.Migrations
                     b.Property<double>("Duree")
                         .HasColumnType("REAL");
 
-                    b.Property<string>("HashedIdEmploye")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Motif")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("IdEmploye")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 

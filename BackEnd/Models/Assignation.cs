@@ -3,9 +3,9 @@ using System.Text;
 public class Assignation
 {
     public int Id { get; set; }
-    internal string HashedIdEmploye { get; set; }
-    internal string HashedIdTache { get; set; }
-    internal string Message { get; set; } = null!;
+    public string HashedIdEmploye { get; set; }
+    public string HashedIdTache { get; set; }
+    public string Message { get; set; } = null!;
 
     public Assignation() { }
 
@@ -35,5 +35,10 @@ public class Assignation
             byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(id.ToString()));
             return Convert.ToBase64String(hashedBytes);
         }
+    }
+    public void SetIds(int IdTache, int IdEmploye)
+    {
+        this.HashedIdTache = HashId(IdTache);
+        this.HashedIdEmploye = HashId(IdEmploye);
     }
 }

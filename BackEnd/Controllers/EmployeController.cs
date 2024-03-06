@@ -76,6 +76,11 @@ public class EmployeController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Employe>> PostEmploye(EmployeDTO employeDTO)
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
         if (!IsMotDePasseValid(employeDTO.MotDePasse))
         {
             return BadRequest("Le mot de passe doit contenir au moins un caractère et un chiffre.");
@@ -122,6 +127,11 @@ public class EmployeController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> PutEmploye(int id, EmployeDTO employeDTO)
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
         if (id != employeDTO.Id)
             return BadRequest();
 

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
 
 
 [ApiController]
@@ -45,18 +46,19 @@ public class CongeController : ControllerBase
         return new CongeDTO(conge);
     }
 
-    // GET : api/conge/byEmploye/3
+    // GET : api/conge/byEmploye/{hashedId}
     [HttpGet("byEmploye/{idEmploye}")]
     public async Task<ActionResult<IEnumerable<CongeDTO>>> GetCongesByEmployeId(int idEmploye)
     {
-        var conge = await _context.Conges
-            .Where(c => c.IdEmploye == idEmploye)
+        var hashedId = HashId(idEmploye);
+        var conges = await _context.Conges
+            .Where(c => c.HashedIdEmploye == hashedId)
             .ToListAsync();
 
-        if (conge == null || conge.Count == 0)
+        if (conges == null || conges.Count == 0)
             return NotFound();
 
-        return conge.Select(t => new CongeDTO(t)).ToList();
+        return conges.Select(t => new CongeDTO(t)).ToList();
     }
 
 
@@ -64,6 +66,11 @@ public class CongeController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Conge>> PostConge(CongeDTO congeDTO)
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
         Conge conge = new Conge(congeDTO, _context);
 
         _context.Conges.Add(conge);
@@ -93,6 +100,11 @@ public class CongeController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> PutConge(int id, CongeDTO congeDTO)
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
         if (id != congeDTO.Id)
             return BadRequest();
 
@@ -116,6 +128,15 @@ public class CongeController : ControllerBase
         }
 
         return NoContent();
+    }
+
+    private string HashId(int id)
+    {
+        using (var sha256 = System.Security.Cryptography.SHA256.Create())
+        {
+            byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(id.ToString()));
+            return Convert.ToBase64String(hashedBytes);
+        }
     }
 
 }

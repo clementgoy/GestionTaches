@@ -66,6 +66,11 @@ public class TacheController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Tache>> PostTache(TacheDTO tacheDTO)
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
         Tache tache = new Tache(tacheDTO, _context);
 
         _context.Taches.Add(tache);

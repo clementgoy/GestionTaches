@@ -18,6 +18,11 @@ public class ForgetPasswordController : ControllerBase
     [HttpPost("request-reset")]
     public async Task<IActionResult> RequestResetPassword(RequestReset model)
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
         var user = await _context.Employes.FirstOrDefaultAsync(u => u.Email == model.Email);
         if (user == null) return BadRequest("Utilisateur non trouvé");
 
@@ -60,6 +65,11 @@ public class ForgetPasswordController : ControllerBase
     [HttpPost("reset-password")]
     public async Task<IActionResult> ResetPassword(ResetPassword model)
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
         var user = _context.Employes.FirstOrDefault(u => u.ResetToken == model.Token && u.ResetTokenExpires > DateTime.UtcNow);
         if (user == null) return BadRequest("Token invalide ou expiré");
 

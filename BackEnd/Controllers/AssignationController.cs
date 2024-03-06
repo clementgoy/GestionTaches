@@ -44,6 +44,11 @@ public class AssignationController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<AssignationDTO>> PostAssignation(AssignationDTO assignationDTO)
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
         if (!_context.Employes.Any(e => e.Id == assignationDTO.IdEmploye))
         {
             return BadRequest("L'employé spécifié n'existe pas.");
@@ -66,6 +71,11 @@ public class AssignationController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> PutAssignation(int id, AssignationDTO assignationDTO)
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
         if (id != assignationDTO.Id)
         {
             return BadRequest();

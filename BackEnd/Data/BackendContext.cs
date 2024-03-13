@@ -12,6 +12,10 @@ public class BackendContext : DbContext
 
     public string DbPath { get; private set; }
 
+    public BackendContext(DbContextOptions<BackendContext> options) : base(options)
+    {
+        DbPath = "Backend.db";
+    }
 
     public BackendContext()
     {

@@ -5,7 +5,7 @@
 namespace BackEnd.Migrations
 {
     /// <inheritdoc />
-    public partial class PleeeeeaaaaseWork2 : Migration
+    public partial class NewMigration4 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

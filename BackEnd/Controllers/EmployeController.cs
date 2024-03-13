@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
 
 
 [ApiController]
@@ -14,6 +15,7 @@ public class EmployeController : ControllerBase
     }
 
     // GET: api/employes
+    [Authorize(Roles = "Manager")]
     [HttpGet]
     public async Task<ActionResult<IEnumerable<EmployeDTO>>> GetEmployes()
     {
@@ -23,6 +25,7 @@ public class EmployeController : ControllerBase
     }
 
     // GET: api/employe/2
+    [Authorize(Roles = "Manager")]
     [HttpGet("{id}")]
     public async Task<ActionResult<EmployeDTO>> GetEmploye(int id)
     {
@@ -35,6 +38,7 @@ public class EmployeController : ControllerBase
     }
 
     // GET : api/employes/byTache/3
+    [Authorize(Roles = "Manager")]
     [HttpGet("byTache/{idTache}")]
     public async Task<ActionResult<IEnumerable<EmployeDTO>>> GetEmployesByTacheId(int idTache)
     {
@@ -73,22 +77,23 @@ public class EmployeController : ControllerBase
 
 
     // POST: api/employe
+    [Authorize(Roles = "Manager")]
     [HttpPost]
-    public async Task<ActionResult<Employe>> PostEmploye(EmployeDTO employeDTO)
+    public async Task<ActionResult<Employe>> PostEmploye(EmployeMdpDTO employeMdpDTO)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
 
-        if (!IsMotDePasseValid(employeDTO.MotDePasse))
+        if (!IsMotDePasseValid(employeMdpDTO.MotDePasse))
         {
             return BadRequest("Le mot de passe doit contenir au moins un caractère et un chiffre.");
         }
 
-        Employe employe = new Employe(employeDTO, _context);
+        Employe employe = new Employe(employeMdpDTO, _context);
 
-        employeDTO.MotDePasse = "";
+        employeMdpDTO.MotDePasse = "";
 
         _context.Employes.Add(employe);
         await _context.SaveChangesAsync();
@@ -103,6 +108,7 @@ public class EmployeController : ControllerBase
 
 
     // DELETE: api/employes/2
+    [Authorize(Roles = "Manager")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteEmployeItem(int id)
     {
@@ -124,6 +130,7 @@ public class EmployeController : ControllerBase
 
 
     // PUT: api/employe/2
+    [Authorize(Roles = "Manager")]
     [HttpPut("{id}")]
     public async Task<IActionResult> PutEmploye(int id, EmployeDTO employeDTO)
     {

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BackEnd.Migrations
 {
     [DbContext(typeof(BackendContext))]
-    [Migration("20240229222411_PleeeeeaaaaseWork3")]
-    partial class PleeeeeaaaaseWork3
+    [Migration("20240312101622_NewMigration3")]
+    partial class NewMigration3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,18 @@ namespace BackEnd.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("HashedIdEmploye")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("HashedIdTache")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -42,8 +54,13 @@ namespace BackEnd.Migrations
                     b.Property<double>("Duree")
                         .HasColumnType("REAL");
 
-                    b.Property<int>("IdEmploye")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("HashedIdEmploye")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Motif")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -76,7 +93,6 @@ namespace BackEnd.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ResetToken")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("ResetTokenExpires")

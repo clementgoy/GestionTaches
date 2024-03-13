@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BackEnd.Migrations
 {
     [DbContext(typeof(BackendContext))]
-    [Migration("20240225090220_PleeeeeaaaaseWork2")]
-    partial class PleeeeeaaaaseWork2
+    [Migration("20240312102714_NewMigration6")]
+    partial class NewMigration6
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,18 @@ namespace BackEnd.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("HashedIdEmploye")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("HashedIdTache")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -42,8 +54,13 @@ namespace BackEnd.Migrations
                     b.Property<double>("Duree")
                         .HasColumnType("REAL");
 
-                    b.Property<int>("IdEmploye")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("HashedIdEmploye")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Motif")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -75,11 +92,10 @@ namespace BackEnd.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("ReinitialiserMDPJeton")
-                        .IsRequired()
+                    b.Property<string>("ResetToken")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("ReinitialiserMDPJetonExpiration")
+                    b.Property<DateTime?>("ResetTokenExpires")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Statut")

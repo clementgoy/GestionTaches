@@ -13,15 +13,15 @@ public class Employe
     public StatutEmploye Statut { get; set; }
     public PoleEntreprise Pole { get; set; }
     public Employe() { }
-    public Employe(EmployeDTO employeDTO, BackendContext context)
+    public Employe(EmployeMdpDTO employeMdpDTO, BackendContext context)
     {
-        Id = employeDTO.Id;
-        Nom = employeDTO.Nom;
-        Prenom = employeDTO.Prenom;
-        Email = employeDTO.Email;
-        SetMotDePasse(employeDTO.MotDePasse);
-        SetStatut(employeDTO.Statut);
-        SetPole(employeDTO.Pole);
+        Id = employeMdpDTO.Id;
+        Nom = employeMdpDTO.Nom;
+        Prenom = employeMdpDTO.Prenom;
+        Email = employeMdpDTO.Email;
+        SetMotDePasse(employeMdpDTO.MotDePasse);
+        SetStatut(employeMdpDTO.Statut);
+        SetPole(employeMdpDTO.Pole);
     }
 
     public void SetMotDePasse(string motDePasse)

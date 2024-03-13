@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-public class EmployeDTO
+public class EmployeMdpDTO
 {
     public int Id { get; set; }
 
@@ -15,6 +15,10 @@ public class EmployeDTO
     [EmailAddress(ErrorMessage = "Le format de l'email n'est pas valide")]
     public string Email { get; set; }
 
+    [Required(ErrorMessage = "Le mot de passe est obligatoire")]
+    [StringLength(100, ErrorMessage = "Le mot de passe doit contenir entre 3 et 50 caractères", MinimumLength = 3)]
+    public string MotDePasse { get; set; }
+
     [Required(ErrorMessage = "Le statut est obligatoire")]
     [StringLength(100, ErrorMessage = "Le statut doit contenir entre 3 et 50 caractères", MinimumLength = 3)]
     public string Statut { get; set; }
@@ -23,9 +27,9 @@ public class EmployeDTO
     [StringLength(100, ErrorMessage = "Le pole doit contenir entre 3 et 50 caractères", MinimumLength = 3)]
     public string Pole { get; set; }
 
-    public EmployeDTO() { }
+    public EmployeMdpDTO() { }
 
-    public EmployeDTO(Employe employe)
+    public EmployeMdpDTO(Employe employe)
     {
         Id = employe.Id;
         Nom = employe.Nom;

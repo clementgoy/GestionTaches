@@ -4,6 +4,8 @@ using System.Text;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
 
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Configuration de la base de données SQLite
@@ -47,11 +49,11 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 // Configuration de l'authentification JWT
-// Configuration de l'authentification JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        var key = Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]);
+        // Correction ici: utiliser builder.Configuration au lieu de _configuration
+        var key = Encoding.ASCII.GetBytes(builder.Configuration["Jwt:Key"]);
 
         options.TokenValidationParameters = new TokenValidationParameters
         {

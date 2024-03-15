@@ -67,18 +67,33 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+var devCorsPolicy = "devCorsPolicy";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(devCorsPolicy, builder =>
+    {
+        //builder.WithOrigins("http://localhost:800").AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+        //builder.SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost");
+        //builder.SetIsOriginAllowed(origin => true);
+    });
+});
 
 var app = builder.Build();
+app.UseCors("AllowAllOrigins");
 
 // Configuration du pipeline HTTP
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseCors(devCorsPolicy);
+
 }
 
 app.UseHttpsRedirection();
 app.UseAuthentication();
+app.UseMiddleware<JwtTokenValidationMiddleware>();
 app.UseAuthorization();
 
 app.MapControllers();

@@ -36,16 +36,19 @@ public class AuthentificationController : ControllerBase
         // Générer le token JWT
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]);
+
+        var role = utilisateur.Statut == 0 ? "Manager" : "MembreEquipe";
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(new Claim[]
             {
                 new Claim(ClaimTypes.Name, utilisateur.Email),
-                new Claim(ClaimTypes.Role, utilisateur.Statut.ToString())
+                new Claim(ClaimTypes.Role, role)
             }),
             Expires = DateTime.UtcNow.AddDays(2),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
         };
+
 
         var token = tokenHandler.CreateToken(tokenDescriptor);
         var tokenString = tokenHandler.WriteToken(token);

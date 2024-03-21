@@ -108,34 +108,40 @@ public static class SeedData
         }
         var assignation1 = new Assignation
         {
+            IdEmploye = 1,
+            IdTache = 1,
             Message = "A faire le plus vite possible, quitte à mettre en pause les autres taches",
         };
-        assignation1.SetIds(1, 1);
         var assignation2 = new Assignation
         {
+            IdEmploye = 1,
+            IdTache = 3,
             Message = "A faire le plus vite possible, quitte à mettre en pause les autres taches",
         };
-        assignation2.SetIds(1, 3);
         var assignation3 = new Assignation
         {
+            IdEmploye = 2,
+            IdTache = 4,
             Message = "A faire le plus vite possible, quitte à mettre en pause les autres taches",
         };
-        assignation3.SetIds(2, 4);
         var assignation4 = new Assignation
         {
+            IdEmploye = 3,
+            IdTache = 2,
             Message = "A faire le plus vite possible, quitte à mettre en pause les autres taches",
         };
-        assignation4.SetIds(3, 2);
         var assignation5 = new Assignation
         {
+            IdEmploye = 3,
+            IdTache = 3,
             Message = "A faire le plus vite possible, quitte à mettre en pause les autres taches",
         };
-        assignation5.SetIds(3, 3);
         var assignation6 = new Assignation
         {
+            IdEmploye = 5,
+            IdTache = 4,
             Message = "A faire le plus vite possible, quitte à mettre en pause les autres taches",
         };
-        assignation6.SetIds(5, 4);
 
         context.Assignations.AddRange(assignation1, assignation2, assignation3, assignation4, assignation5, assignation6);
 

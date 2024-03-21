@@ -48,13 +48,12 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+var key = Encoding.ASCII.GetBytes(builder.Configuration["Jwt:Key"]);
+
 // Configuration de l'authentification JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        // Correction ici: utiliser builder.Configuration au lieu de _configuration
-        var key = Encoding.ASCII.GetBytes(builder.Configuration["Jwt:Key"]);
-
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuerSigningKey = true,
@@ -67,19 +66,20 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+
 var devCorsPolicy = "devCorsPolicy";
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(devCorsPolicy, builder =>
     {
         //builder.WithOrigins("http://localhost:800").AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
         builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-        //builder.SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost");
-        //builder.SetIsOriginAllowed(origin => true);
     });
 });
 
 var app = builder.Build();
+
 app.UseCors("AllowAllOrigins");
 
 // Configuration du pipeline HTTP
@@ -92,6 +92,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseRouting();
 app.UseAuthentication();
 app.UseMiddleware<JwtTokenValidationMiddleware>();
 app.UseAuthorization();

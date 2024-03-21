@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using BCrypt.Net;
 
 public class Employe

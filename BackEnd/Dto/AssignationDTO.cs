@@ -17,6 +17,8 @@ public class AssignationDTO
     public AssignationDTO(Assignation assignation)
     {
         Id = assignation.Id;
+        IdEmploye = assignation.IdEmploye;
+        IdTache = assignation.IdTache;
         Message = assignation.Message;
     }
 }

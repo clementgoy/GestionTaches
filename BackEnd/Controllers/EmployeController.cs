@@ -15,7 +15,6 @@ public class EmployeController : ControllerBase
     }
 
     // GET: api/employes
-    [Authorize(Roles = "Manager")]
     [HttpGet]
     public async Task<ActionResult<IEnumerable<EmployeDTO>>> GetEmployes()
     {
@@ -42,25 +41,27 @@ public class EmployeController : ControllerBase
     [HttpGet("byTache/{idTache}")]
     public async Task<ActionResult<IEnumerable<EmployeDTO>>> GetEmployesByTacheId(int idTache)
     {
-        var hashedIdTache = HashId(idTache);
-
+        // Premier étape: Récupérer toutes les assignations qui correspondent à l'idTache donné
         var assignations = await _context.Assignations
-            .Where(a => a.HashedIdTache == hashedIdTache)
+            .Where(a => a.IdTache == idTache) // Supposons que vous avez IdTache comme champ directement disponible
             .ToListAsync();
 
         if (assignations == null || assignations.Count == 0)
             return NotFound();
 
-        var employeIds = assignations.Select(a => a.HashedIdEmploye).ToList();
+        // Deuxième étape: Extraire les ID employé et les déhasher si nécessaire (ou toute autre logique applicable en mémoire)
+        var employeIds = assignations.Select(a => a.IdEmploye).ToList(); // Supposons que IdEmploye est directement disponible
 
+        // Troisième étape: Utiliser les ID employé pour récupérer les employés correspondants
         var employes = await _context.Employes
-            .Where(e => employeIds.Contains(HashId(e.Id)))
+            .Where(e => employeIds.Contains(e.Id))
+            .Select(e => new EmployeDTO(e))
             .ToListAsync();
 
         if (employes == null || employes.Count == 0)
             return NotFound();
 
-        return employes.Select(e => new EmployeDTO(e)).ToList();
+        return employes;
     }
 
     // GET: api/employe/byEmail/2
@@ -112,14 +113,12 @@ public class EmployeController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteEmployeItem(int id)
     {
-        var hashedIdEmploye = HashId(id);
-
         var employe = await _context.Employes.FindAsync(id);
 
         if (employe == null)
             return NotFound();
 
-        var assignations = _context.Assignations.Where(a => a.HashedIdEmploye == hashedIdEmploye);
+        var assignations = _context.Assignations.Where(a => a.IdEmploye == id);
         _context.Assignations.RemoveRange(assignations);
 
         _context.Employes.Remove(employe);

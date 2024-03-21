@@ -40,19 +40,18 @@ public class TacheController : ControllerBase
     [HttpGet("byEmploye/{idEmploye}")]
     public async Task<ActionResult<IEnumerable<TacheDTO>>> GetTachesByEmployeId(int idEmploye)
     {
-        var hashedIdEmploye = HashId(idEmploye);
 
         var assignations = await _context.Assignations
-            .Where(a => a.HashedIdEmploye == hashedIdEmploye)
+            .Where(a => a.IdEmploye == idEmploye)
             .ToListAsync();
 
         if (assignations == null || assignations.Count == 0)
             return NotFound();
 
-        var tacheIds = assignations.Select(a => a.HashedIdTache).ToList();
+        var tacheIds = assignations.Select(a => a.IdTache).ToList();
 
         var taches = await _context.Taches
-            .Where(t => tacheIds.Contains(HashId(t.Id)))
+            .Where(t => tacheIds.Contains(t.Id))
             .ToListAsync();
 
         if (taches == null || taches.Count == 0)
@@ -66,11 +65,6 @@ public class TacheController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Tache>> PostTache(TacheDTO tacheDTO)
     {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
-
         Tache tache = new Tache(tacheDTO, _context);
 
         _context.Taches.Add(tache);
@@ -84,13 +78,12 @@ public class TacheController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteTache(int id)
     {
-        var hashedIdTache = HashId(id);
         var tache = await _context.Taches.FindAsync(id);
 
         if (tache == null)
             return NotFound();
 
-        var assignations = _context.Assignations.Where(a => a.HashedIdTache == hashedIdTache);
+        var assignations = _context.Assignations.Where(a => a.IdTache == id);
         _context.Assignations.RemoveRange(assignations);
 
         _context.Taches.Remove(tache);
@@ -128,14 +121,4 @@ public class TacheController : ControllerBase
 
         return NoContent();
     }
-
-    private string HashId(int id)
-    {
-        using (var sha256 = System.Security.Cryptography.SHA256.Create())
-        {
-            byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(id.ToString()));
-            return Convert.ToBase64String(hashedBytes);
-        }
-    }
-
 }

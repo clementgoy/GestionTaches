@@ -1,8 +1,11 @@
+// ...other using statements...
+
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
 [Route("api/[controller]")]
@@ -26,29 +29,30 @@ public class AuthentificationController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        var utilisateur = await _context.Employes.FirstOrDefaultAsync(u => u.Email == request.Email);
+        var utilisateur = await _context.Employes
+            .FirstOrDefaultAsync(u => u.Email == request.Email);
 
         if (utilisateur == null || !BCrypt.Net.BCrypt.Verify(request.Password, utilisateur.MotDePasseHash))
         {
             return Unauthorized("Email ou mot de passe incorrect");
         }
 
-        // Générer le token JWT
+        var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]));
         var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]);
+        var role = utilisateur.Statut; // Make sure 'Statut' is the property you use for roles
 
-        var role = utilisateur.Statut;
         var tokenDescriptor = new SecurityTokenDescriptor
         {
-            Subject = new ClaimsIdentity(new Claim[]
+            Subject = new ClaimsIdentity(new[]
             {
                 new Claim(ClaimTypes.Name, utilisateur.Email),
-                new Claim(ClaimTypes.Role, role)
+                new Claim(ClaimTypes.Role, role) // Assuming 'role' is a string. If not, convert it properly.
             }),
             Expires = DateTime.UtcNow.AddDays(2),
-            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature),
+            Audience = _configuration["Jwt:Audience"],
+            Issuer = _configuration["Jwt:Issuer"],
         };
-
 
         var token = tokenHandler.CreateToken(tokenDescriptor);
         var tokenString = tokenHandler.WriteToken(token);

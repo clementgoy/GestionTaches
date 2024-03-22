@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 [ApiController]
 [Route("api/conge")]
@@ -12,6 +13,7 @@ public class CongeController : ControllerBase
     }
 
     // GET: api/conges
+    [Authorize]
     [HttpGet]
     public async Task<ActionResult<IEnumerable<CongeDTO>>> GetConges()
     {
@@ -20,19 +22,8 @@ public class CongeController : ControllerBase
         return await conges.ToListAsync();
     }
 
-    // GET: api/tache/2
-    [HttpGet("{id}")]
-    public async Task<ActionResult<TacheDTO>> GetTache(int id)
-    {
-        var tache = await _context.Taches.SingleOrDefaultAsync(t => t.Id == id);
-
-        if (tache == null)
-            return NotFound();
-
-        return new TacheDTO(tache);
-    }
-
     // GET: api/conge/2
+    [Authorize]
     [HttpGet("conge/{id}")]
     public async Task<ActionResult<CongeDTO>> GetConge(int id)
     {
@@ -45,6 +36,7 @@ public class CongeController : ControllerBase
     }
 
     // GET : api/conge/byEmploye/{hashedId}
+    [Authorize]
     [HttpGet("byEmploye/{idEmploye}")]
     public async Task<ActionResult<IEnumerable<CongeDTO>>> GetCongesByEmployeId(int idEmploye)
     {
@@ -60,6 +52,7 @@ public class CongeController : ControllerBase
 
 
     // POST: api/conge
+    [Authorize(Roles = "Manager")]
     [HttpPost]
     public async Task<ActionResult<Conge>> PostConge(CongeDTO congeDTO)
     {
@@ -78,6 +71,7 @@ public class CongeController : ControllerBase
 
 
     // DELETE: api/conge/2
+    [Authorize]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteConge(int id)
     {
@@ -94,6 +88,7 @@ public class CongeController : ControllerBase
 
 
     // PUT: api/conge/2
+    [Authorize(Roles = "Manager")]
     [HttpPut("{id}")]
     public async Task<IActionResult> PutConge(int id, CongeDTO congeDTO)
     {

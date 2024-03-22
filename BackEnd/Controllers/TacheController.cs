@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Text;
+using Microsoft.AspNetCore.Authorization;
 
 
 [ApiController]
@@ -15,6 +15,7 @@ public class TacheController : ControllerBase
 
 
     // GET: api/taches
+    [Authorize(Roles = "Manager")]
     [HttpGet]
     public async Task<ActionResult<IEnumerable<TacheDTO>>> GetTaches()
     {
@@ -24,6 +25,7 @@ public class TacheController : ControllerBase
 
 
     // GET: api/tache/2
+    [Authorize(Roles = "Manager")]
     [HttpGet("{id}")]
     public async Task<ActionResult<TacheDTO>> GetTache(int id)
     {
@@ -37,6 +39,7 @@ public class TacheController : ControllerBase
 
 
     // GET : api/taches/byEmploye/3
+    [Authorize]
     [HttpGet("byEmploye/{idEmploye}")]
     public async Task<ActionResult<IEnumerable<TacheDTO>>> GetTachesByEmployeId(int idEmploye)
     {
@@ -62,6 +65,7 @@ public class TacheController : ControllerBase
 
 
     // POST: api/tache
+    [Authorize(Roles = "Manager")]
     [HttpPost]
     public async Task<ActionResult<Tache>> PostTache(TacheDTO tacheDTO)
     {
@@ -75,6 +79,7 @@ public class TacheController : ControllerBase
 
 
     // DELETE: api/taches/2
+    [Authorize(Roles = "Manager")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteTache(int id)
     {
@@ -94,6 +99,7 @@ public class TacheController : ControllerBase
 
 
     // PUT: api/tache/2
+    [Authorize(Roles = "Manager")]
     [HttpPut("{id}")]
     public async Task<IActionResult> PutTache(int id, TacheDTO tacheDTO)
     {

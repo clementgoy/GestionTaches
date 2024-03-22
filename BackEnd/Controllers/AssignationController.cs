@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using System.Text;
 
 [ApiController]
@@ -26,6 +24,7 @@ public class AssignationController : ControllerBase
     }
 
     // GET: api/assignation/1
+    [Authorize(Roles = "Manager")]
     [HttpGet("{id}")]
     public async Task<ActionResult<AssignationDTO>> GetAssignation(int id)
     {
@@ -41,6 +40,7 @@ public class AssignationController : ControllerBase
 
 
     // POST: api/assignation
+    [Authorize(Roles = "Manager")]
     [HttpPost]
     public async Task<ActionResult<AssignationDTO>> PostAssignation(AssignationDTO assignationDTO)
     {
@@ -68,6 +68,7 @@ public class AssignationController : ControllerBase
 
 
     // PUT: api/assignation
+    [Authorize(Roles = "Manager")]
     [HttpPut("{id}")]
     public async Task<IActionResult> PutAssignation(int id, AssignationDTO assignationDTO)
     {
@@ -120,6 +121,7 @@ public class AssignationController : ControllerBase
     }
 
     // DELETE: api/assignation
+    [Authorize(Roles = "Manager")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAssignation(int id)
     {

@@ -1,7 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Text;
-
 
 [ApiController]
 [Route("api/conge")]
@@ -50,9 +48,8 @@ public class CongeController : ControllerBase
     [HttpGet("byEmploye/{idEmploye}")]
     public async Task<ActionResult<IEnumerable<CongeDTO>>> GetCongesByEmployeId(int idEmploye)
     {
-        var hashedId = HashId(idEmploye);
         var conges = await _context.Conges
-            .Where(c => c.HashedIdEmploye == hashedId)
+            .Where(c => c.IdEmploye == idEmploye)
             .ToListAsync();
 
         if (conges == null || conges.Count == 0)
@@ -128,15 +125,6 @@ public class CongeController : ControllerBase
         }
 
         return NoContent();
-    }
-
-    private string HashId(int id)
-    {
-        using (var sha256 = System.Security.Cryptography.SHA256.Create())
-        {
-            byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(id.ToString()));
-            return Convert.ToBase64String(hashedBytes);
-        }
     }
 
 }

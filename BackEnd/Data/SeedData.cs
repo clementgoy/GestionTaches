@@ -49,8 +49,8 @@ public static class SeedData
             Nom = "Goy",
             Prenom = "Clement",
             Email = "cgoy001@ensc.fr",
-            Statut = StatutEmploye.Manager,
-            Pole = PoleEntreprise.Logistique,
+            Statut = "Manager",
+            Pole = "Logistique",
             ResetToken = "",
             ResetTokenExpires = DateTime.Parse("2024-03-02"),
         };
@@ -60,8 +60,8 @@ public static class SeedData
             Nom = "Dupont",
             Prenom = "François",
             Email = "dfrancois@ensc.fr",
-            Statut = StatutEmploye.MembreEquipe,
-            Pole = PoleEntreprise.Logistique,
+            Statut = "MembreEquipe",
+            Pole = "Logistique",
             ResetToken = "",
             ResetTokenExpires = DateTime.Parse("2024-03-02"),
         };
@@ -71,8 +71,8 @@ public static class SeedData
             Nom = "Valleran",
             Prenom = "Sebastien",
             Email = "svalleran002@ensc.fr",
-            Statut = StatutEmploye.MembreEquipe,
-            Pole = PoleEntreprise.Logistique,
+            Statut = "MembreEquipe",
+            Pole = "Logistique",
             ResetToken = "",
             ResetTokenExpires = DateTime.Parse("2024-03-02"),
         };
@@ -82,8 +82,8 @@ public static class SeedData
             Nom = "Doe",
             Prenom = "John",
             Email = "john.doe@example.com",
-            Statut = StatutEmploye.MembreEquipe,
-            Pole = PoleEntreprise.Logistique,
+            Statut = "MembreEquipe",
+            Pole = "Logistique",
             ResetToken = "",
             ResetTokenExpires = DateTime.Parse("2024-03-02"),
         };
@@ -93,8 +93,8 @@ public static class SeedData
             Nom = "Smith",
             Prenom = "Jane",
             Email = "jane.smith@example.com",
-            Statut = StatutEmploye.MembreEquipe,
-            Pole = PoleEntreprise.Logistique,
+            Statut = "MembreEquipe",
+            Pole = "Logistique",
             ResetToken = "",
             ResetTokenExpires = DateTime.Parse("2024-03-02"),
         };
@@ -147,32 +147,32 @@ public static class SeedData
 
         var conge1 = new Conge
         {
+            IdEmploye = 1,
             Date = DateTime.Now.AddDays(30),
             Duree = 2,
             Motif = "Vacances",
         };
-        conge1.SetId(1);
         var conge2 = new Conge
         {
+            IdEmploye = 2,
             Date = DateTime.Now.AddDays(60),
             Duree = 1.8,
             Motif = "Congé personnel",
         };
-        conge2.SetId(2);
         var conge3 = new Conge
         {
+            IdEmploye = 3,
             Date = DateTime.Now.AddDays(60),
             Duree = 5.8,
             Motif = "Voyage",
         };
-        conge3.SetId(3);
         var conge4 = new Conge
         {
+            IdEmploye = 1,
             Date = DateTime.Now.AddDays(60),
             Duree = 60,
             Motif = "Congé sabattique",
         };
-        conge4.SetId(1);
 
         context.Conges.AddRange(conge1, conge2, conge3, conge4);
 

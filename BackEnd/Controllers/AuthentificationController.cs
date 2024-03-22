@@ -37,7 +37,7 @@ public class AuthentificationController : ControllerBase
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]);
 
-        var role = utilisateur.Statut == 0 ? "Manager" : "MembreEquipe";
+        var role = utilisateur.Statut;
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(new Claim[]

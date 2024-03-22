@@ -17,11 +17,11 @@ public class EmployeDTO
 
     [Required(ErrorMessage = "Le statut est obligatoire")]
     [StringLength(100, ErrorMessage = "Le statut doit contenir entre 3 et 50 caractères", MinimumLength = 3)]
-    public string Statut { get; set; }
+    public StatutEmploye Statut { get; set; }
 
     [Required(ErrorMessage = "Le pole est obligatoire")]
     [StringLength(100, ErrorMessage = "Le pole doit contenir entre 3 et 50 caractères", MinimumLength = 3)]
-    public string Pole { get; set; }
+    public PoleEntreprise Pole { get; set; }
 
     public EmployeDTO() { }
 
@@ -31,7 +31,45 @@ public class EmployeDTO
         Nom = employe.Nom;
         Prenom = employe.Prenom;
         Email = employe.Email;
-        Statut = employe.Statut.ToString();
-        Pole = employe.Pole.ToString();
+        SetStatut(employe.Statut);
+        SetPole(employe.Pole);
     }
+
+    public void SetStatut(string statut)
+    {
+        if (Enum.TryParse<StatutEmploye>(statut, out var parsedStatut))
+        {
+            Statut = parsedStatut;
+        }
+        else
+        {
+            // Gérer le cas où la conversion échoue
+            throw new ArgumentException("Statut non valide");
+        }
+    }
+    public void SetPole(string pole)
+    {
+        if (Enum.TryParse<PoleEntreprise>(pole, out var parsedPole))
+        {
+            Pole = parsedPole;
+        }
+        else
+        {
+            // Gérer le cas où la conversion échoue
+            throw new ArgumentException("Pôle non valide");
+        }
+    }
+}
+
+public enum StatutEmploye
+{
+    Manager,
+    MembreEquipe
+}
+public enum PoleEntreprise
+{
+    Logistique,
+    Developpement,
+    Design,
+    Production
 }

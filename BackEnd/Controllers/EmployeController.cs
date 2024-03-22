@@ -151,8 +151,8 @@ public class EmployeController : ControllerBase
         existingEmploye.Nom = employeDTO.Nom;
         existingEmploye.Prenom = employeDTO.Prenom;
         existingEmploye.Email = employeDTO.Email;
-        existingEmploye.SetStatut(employeDTO.Statut);
-        existingEmploye.SetPole(employeDTO.Pole);
+        existingEmploye.Statut = employeDTO.Statut.ToString();
+        existingEmploye.Pole = employeDTO.Pole.ToString();
 
         // Mettre à jour l'employé dans le contexte et sauvegarder les modifications
         _context.Entry(existingEmploye).State = EntityState.Modified;

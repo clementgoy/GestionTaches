@@ -4,7 +4,7 @@ public class CongeDTO
     public int Id { get; set; }
 
     [Required(ErrorMessage = "L'id de l'employé (haché) est obligatoire")]
-    public string HashedIdEmploye { get; set; }
+    public int IdEmploye { get; set; }
 
     [Required(ErrorMessage = "La durée est obligatoire")]
     public double Duree { get; set; }
@@ -20,7 +20,7 @@ public class CongeDTO
     public CongeDTO(Conge conge)
     {
         Id = conge.Id;
-        HashedIdEmploye = conge.HashedIdEmploye;
+        IdEmploye = conge.IdEmploye;
         Duree = conge.Duree;
         Date = conge.Date;
         Motif = conge.Motif;

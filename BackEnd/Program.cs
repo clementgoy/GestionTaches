@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+SeedData.Init();
+
 // Configuration de la base de données SQLite
 builder.Services.AddDbContext<BackendContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("BackendDatabase")));

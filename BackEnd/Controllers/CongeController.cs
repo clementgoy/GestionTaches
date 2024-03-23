@@ -89,6 +89,7 @@ public class CongeController : ControllerBase
 
     // PUT: api/conge/2
     [Authorize(Roles = "Manager")]
+    [Authorize(Roles = "Manager")]
     [HttpPut("{id}")]
     public async Task<IActionResult> PutConge(int id, CongeDTO congeDTO)
     {
@@ -98,14 +99,21 @@ public class CongeController : ControllerBase
         }
 
         if (id != congeDTO.Id)
-            return BadRequest();
+        {
+            return BadRequest("L'ID du congé ne correspond pas à celui dans l'URL.");
+        }
 
-        Conge existingConge = await _context.Conges.FindAsync(id);
+        var existingConge = await _context.Conges.FindAsync(id);
 
         if (existingConge == null)
-            return NotFound();
+        {
+            return NotFound($"Aucun congé trouvé avec l'ID {id}.");
+        }
 
-        _context.Entry(existingConge).State = EntityState.Modified;
+        existingConge.IdEmploye = congeDTO.IdEmploye;
+        existingConge.Duree = congeDTO.Duree;
+        existingConge.Date = congeDTO.Date;
+        existingConge.Motif = congeDTO.Motif;
 
         try
         {
@@ -113,13 +121,16 @@ public class CongeController : ControllerBase
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!_context.Conges.Any(m => m.Id == id))
+            if (!_context.Conges.Any(e => e.Id == id))
+            {
                 return NotFound();
+            }
             else
+            {
                 throw;
+            }
         }
 
         return NoContent();
     }
-
 }

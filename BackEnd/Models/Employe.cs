@@ -17,7 +17,6 @@ public class Employe
         Nom = employeMdpDTO.Nom;
         Prenom = employeMdpDTO.Prenom;
         Email = employeMdpDTO.Email;
-        SetMotDePasse(employeMdpDTO.MotDePasse);
         Statut = employeMdpDTO.Statut.ToString();
         Pole = employeMdpDTO.Pole.ToString();
     }

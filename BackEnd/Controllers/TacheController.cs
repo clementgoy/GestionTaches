@@ -100,16 +100,25 @@ public class TacheController : ControllerBase
 
     // PUT: api/tache/2
     [Authorize(Roles = "Manager")]
+    [Authorize(Roles = "Manager")]
     [HttpPut("{id}")]
     public async Task<IActionResult> PutTache(int id, TacheDTO tacheDTO)
     {
         if (id != tacheDTO.Id)
-            return BadRequest();
+        {
+            return BadRequest("L'ID de la tâche ne correspond pas à celui dans l'URL.");
+        }
 
-        Tache existingTache = await _context.Taches.FindAsync(id);
+        var existingTache = await _context.Taches.FindAsync(id);
 
         if (existingTache == null)
-            return NotFound();
+        {
+            return NotFound($"Aucune tâche trouvée avec l'ID {id}.");
+        }
+
+        existingTache.Duree = tacheDTO.Duree;
+        existingTache.Description = tacheDTO.Description;
+        existingTache.Echeance = tacheDTO.Echeance;
 
         _context.Entry(existingTache).State = EntityState.Modified;
 
@@ -119,12 +128,17 @@ public class TacheController : ControllerBase
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!_context.Taches.Any(m => m.Id == id))
+            if (!_context.Taches.Any(e => e.Id == id))
+            {
                 return NotFound();
+            }
             else
+            {
                 throw;
+            }
         }
 
         return NoContent();
     }
+
 }

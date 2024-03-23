@@ -94,8 +94,7 @@ public class EmployeController : ControllerBase
         }
 
         Employe employe = new Employe(employeMdpDTO, _context);
-
-        employeMdpDTO.MotDePasse = "";
+        employe.SetMotDePasse(employeMdpDTO.MotDePasse);
 
         _context.Employes.Add(employe);
         await _context.SaveChangesAsync();

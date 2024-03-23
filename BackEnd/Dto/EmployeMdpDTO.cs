@@ -20,11 +20,9 @@ public class EmployeMdpDTO
     public string MotDePasse { get; set; }
 
     [Required(ErrorMessage = "Le statut est obligatoire")]
-    [StringLength(100, ErrorMessage = "Le statut doit contenir entre 3 et 50 caractères", MinimumLength = 3)]
     public StatutEmploye Statut { get; set; }
 
     [Required(ErrorMessage = "Le pole est obligatoire")]
-    [StringLength(100, ErrorMessage = "Le pole doit contenir entre 3 et 50 caractères", MinimumLength = 3)]
     public PoleEntreprise Pole { get; set; }
 
     public EmployeMdpDTO() { }

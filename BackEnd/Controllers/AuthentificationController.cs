@@ -1,5 +1,3 @@
-// ...other using statements...
-
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -29,24 +27,24 @@ public class AuthentificationController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        var utilisateur = await _context.Employes
+        var user = await _context.Employees
             .FirstOrDefaultAsync(u => u.Email == request.Email);
 
-        if (utilisateur == null || !BCrypt.Net.BCrypt.Verify(request.Password, utilisateur.MotDePasseHash))
+        if (user == null || !BCrypt.Net.BCrypt.Verify(request.Password, user.HashedPassword))
         {
             return Unauthorized("Email ou mot de passe incorrect");
         }
 
         var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]));
         var tokenHandler = new JwtSecurityTokenHandler();
-        var role = utilisateur.Statut; // Make sure 'Statut' is the property you use for roles
+        var role = user.Status; 
 
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(new[]
             {
-                new Claim(ClaimTypes.Name, utilisateur.Email),
-                new Claim(ClaimTypes.Role, role) // Assuming 'role' is a string. If not, convert it properly.
+                new Claim(ClaimTypes.Name, user.Email),
+                new Claim(ClaimTypes.Role, role) 
             }),
             Expires = DateTime.UtcNow.AddDays(2),
             SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature),

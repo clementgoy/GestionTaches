@@ -23,7 +23,7 @@ public class ForgetPasswordController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        var user = await _context.Employes.FirstOrDefaultAsync(u => u.Email == model.Email);
+        var user = await _context.Employees.FirstOrDefaultAsync(u => u.Email == model.Email);
         if (user == null) return BadRequest("Utilisateur non trouvé");
 
         // Générer un jeton unique
@@ -54,7 +54,7 @@ public class ForgetPasswordController : ControllerBase
             From = new MailAddress("noreply@example.com"),
             Subject = "Réinitialisation de votre mot de passe",
             Body = $"Veuillez cliquer sur le lien suivant pour réinitialiser votre mot de passe: {link}",
-            IsBodyHtml = true, // Set to true if you're using HTML in your message body
+            IsBodyHtml = true,
         };
 
         mailMessage.To.Add(email);
@@ -70,16 +70,16 @@ public class ForgetPasswordController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        var user = _context.Employes.FirstOrDefault(u => u.ResetToken == model.Token && u.ResetTokenExpires > DateTime.UtcNow);
-        if (user == null) return BadRequest("Token invalide ou expiré");
+        var user = _context.Employees.FirstOrDefault(u => u.ResetToken == model.Token && u.ResetTokenExpires > DateTime.UtcNow);
+        if (user == null) return BadRequest("Invalid or expired token");
 
-        user.SetMotDePasse(model.NewPassword);
+        user.SetPassword(model.NewPassword);
         user.ResetToken = null;
         user.ResetTokenExpires = null;
 
         await _context.SaveChangesAsync();
 
-        return Ok("Mot de passe réinitialisé.");
+        return Ok("Password updated");
     }
 
 }

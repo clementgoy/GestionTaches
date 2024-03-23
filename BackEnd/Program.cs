@@ -8,7 +8,7 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// SeedData.Init(); // Uncomment this if you have a SeedData class to initialize data.
+SeedData.Init(); 
 
 // Add services to the container.
 builder.Services.AddDbContext<BackendContext>(options =>

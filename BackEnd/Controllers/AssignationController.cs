@@ -4,12 +4,12 @@ using Microsoft.AspNetCore.Authorization;
 using System.Text;
 
 [ApiController]
-[Route("api/assignation")]
-public class AssignationController : ControllerBase
+[Route("api/assignment")]
+public class AssignmentController : ControllerBase
 {
     private readonly BackendContext _context;
 
-    public AssignationController(BackendContext context)
+    public AssignmentController(BackendContext context)
     {
         _context = context;
     }
@@ -23,83 +23,83 @@ public class AssignationController : ControllerBase
         }
     }
 
-    // GET: api/assignation/1
+    // GET: api/assignment/1
     [Authorize(Roles = "Manager")]
     [HttpGet("{id}")]
-    public async Task<ActionResult<AssignationDTO>> GetAssignation(int id)
+    public async Task<ActionResult<AssignmentDTO>> GetAssignment(int id)
     {
-        var assignation = await _context.Assignations.FindAsync(id);
+        var assignment = await _context.Assignments.FindAsync(id);
 
-        if (assignation == null)
+        if (assignment == null)
         {
             return NotFound();
         }
 
-        return new AssignationDTO(assignation);
+        return new AssignmentDTO(assignment);
     }
 
 
-    // POST: api/assignation
+    // POST: api/assignment
     [Authorize(Roles = "Manager")]
     [HttpPost]
-    public async Task<ActionResult<AssignationDTO>> PostAssignation(AssignationDTO assignationDTO)
+    public async Task<ActionResult<AssignmentDTO>> PostAssignment(AssignmentDTO assignmentDTO)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
 
-        if (!_context.Employes.Any(e => e.Id == assignationDTO.IdEmploye))
+        if (!_context.Employees.Any(e => e.Id == assignmentDTO.IdEmployee))
         {
             return BadRequest("L'employé spécifié n'existe pas.");
         }
 
-        if (!_context.Taches.Any(t => t.Id == assignationDTO.IdTache))
+        if (!_context.Tasks.Any(t => t.Id == assignmentDTO.IdTask))
         {
             return BadRequest("La tâche spécifiée n'existe pas.");
         }
 
-        var assignation = new Assignation(assignationDTO, _context);
-        _context.Assignations.Add(assignation);
+        var assignment = new Assignment(assignmentDTO, _context);
+        _context.Assignments.Add(assignment);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction(nameof(GetAssignation), new { id = assignation.Id }, new AssignationDTO(assignation));
+        return CreatedAtAction(nameof(GetAssignment), new { id = assignment.Id }, new AssignmentDTO(assignment));
     }
 
 
-    // PUT: api/assignation
+    // PUT: api/assignment
     [Authorize(Roles = "Manager")]
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutAssignation(int id, AssignationDTO assignationDTO)
+    public async Task<IActionResult> PutAssignment(int id, AssignmentDTO assignmentDTO)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
 
-        if (id != assignationDTO.Id)
+        if (id != assignmentDTO.Id)
         {
             return BadRequest();
         }
 
-        var assignation = await _context.Assignations.FindAsync(id);
+        var assignment = await _context.Assignments.FindAsync(id);
 
-        if (assignation == null)
+        if (assignment == null)
         {
             return NotFound();
         }
 
-        if (!_context.Employes.Any(e => e.Id == assignationDTO.IdEmploye))
+        if (!_context.Employees.Any(e => e.Id == assignmentDTO.IdEmployee))
         {
             return BadRequest("L'employé spécifié n'existe pas.");
         }
 
-        if (!_context.Taches.Any(t => t.Id == assignationDTO.IdTache))
+        if (!_context.Tasks.Any(t => t.Id == assignmentDTO.IdTask))
         {
             return BadRequest("La tâche spécifiée n'existe pas.");
         }
 
-        assignation.Update(assignationDTO);
+        assignment.Update(assignmentDTO);
 
         try
         {
@@ -107,7 +107,7 @@ public class AssignationController : ControllerBase
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!AssignationExists(id))
+            if (!AssignmentExists(id))
             {
                 return NotFound();
             }
@@ -120,26 +120,26 @@ public class AssignationController : ControllerBase
         return NoContent();
     }
 
-    // DELETE: api/assignation
+    // DELETE: api/assignment
     [Authorize(Roles = "Manager")]
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteAssignation(int id)
+    public async Task<IActionResult> DeleteAssignment(int id)
     {
-        var assignation = await _context.Assignations.FindAsync(id);
+        var assignment = await _context.Assignments.FindAsync(id);
 
-        if (assignation == null)
+        if (assignment == null)
         {
             return NotFound();
         }
 
-        _context.Assignations.Remove(assignation);
+        _context.Assignments.Remove(assignment);
         await _context.SaveChangesAsync();
 
         return NoContent();
     }
 
-    private bool AssignationExists(int id)
+    private bool AssignmentExists(int id)
     {
-        return _context.Assignations.Any(e => e.Id == id);
+        return _context.Assignments.Any(e => e.Id == id);
     }
 }

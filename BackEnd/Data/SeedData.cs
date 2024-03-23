@@ -3,178 +3,178 @@ public static class SeedData
     public static void Init()
     {
         BackendContext context = new BackendContext();
-        if (context.Taches.Any())
+        if (context.Tasks.Any())
         {
             return;
         }
-        Tache tache1 = new Tache
+        Task task1 = new Task
         {
-            Duree = 5.8,
+            Duration = 5.8,
             Description = "créer une API pour une application de gestion de tâches",
-            Echeance = DateTime.Parse("2024-12-14"),
+            DueDate = DateTime.Parse("2024-12-14"),
         };
-        Tache tache2 = new Tache
+        Task task2 = new Task
         {
-            Duree = 6.7,
-            Description = "remplir la base de donnée avec des examples de taches",
-            Echeance = DateTime.Parse("2024-04-05"),
+            Duration = 6.7,
+            Description = "remplir la base de donnée avec des examples de tasks",
+            DueDate = DateTime.Parse("2024-04-05"),
         };
-        Tache tache3 = new Tache
+        Task task3 = new Task
         {
-            Duree = 7.1,
+            Duration = 7.1,
             Description = "orgniser le prochain wes",
-            Echeance = DateTime.Parse("2025-01-13"),
+            DueDate = DateTime.Parse("2025-01-13"),
         };
-        var tache4 = new Tache
+        Task task4 = new Task
         {
-            Duree = 8.5,
+            Duration = 8.5,
             Description = "Finaliser le rapport mensuel",
-            Echeance = DateTime.Now.AddDays(5),
+            DueDate = DateTime.Now.AddDays(5),
         };
-        var tache5 = new Tache
+        Task task5 = new Task
         {
-            Duree = 2,
+            Duration = 2,
             Description = "Préparer la présentation du client",
-            Echeance = DateTime.Now.AddDays(10),
+            DueDate = DateTime.Now.AddDays(10),
         };
 
-        context.AddRange(tache1, tache2, tache3, tache4, tache5);
+        context.AddRange(task1, task2, task3, task4, task5);
 
-        if (context.Employes.Any())
+        if (context.Employees.Any())
         {
             return;
         }
-        Employe employe1 = new Employe
+        Employee employee1 = new Employee
         {
-            Nom = "Goy",
-            Prenom = "Clement",
+            Name = "Goy",
+            FirstName = "Clement",
             Email = "cgoy001@ensc.fr",
-            Statut = "Manager",
-            Pole = "Logistique",
+            Status = "Manager",
+            Pole = "Logistics",
             ResetToken = "",
             ResetTokenExpires = DateTime.Parse("2024-03-02"),
         };
-        employe1.SetMotDePasse("cg1");
-        Employe employe2 = new Employe
+        employee1.SetPassword("cg1");
+        Employee employee2 = new Employee
         {
-            Nom = "Dupont",
-            Prenom = "François",
+            Name = "Dupont",
+            FirstName = "François",
             Email = "dfrancois@ensc.fr",
-            Statut = "MembreEquipe",
-            Pole = "Logistique",
+            Status = "TeamMember",
+            Pole = "Logistics",
             ResetToken = "",
             ResetTokenExpires = DateTime.Parse("2024-03-02"),
         };
-        employe2.SetMotDePasse("cfw156lm");
-        Employe employe3 = new Employe
+        employee2.SetPassword("cfw156lm");
+        Employee employee3 = new Employee
         {
-            Nom = "Valleran",
-            Prenom = "Sebastien",
+            Name = "Valleran",
+            FirstName = "Sebastien",
             Email = "svalleran002@ensc.fr",
-            Statut = "MembreEquipe",
-            Pole = "Logistique",
+            Status = "TeamMember",
+            Pole = "Logistics",
             ResetToken = "",
             ResetTokenExpires = DateTime.Parse("2024-03-02"),
         };
-        employe3.SetMotDePasse("jmwd151413");
-        var employe4 = new Employe
+        employee3.SetPassword("jmwd151413");
+        Employee employee4 = new Employee
         {
-            Nom = "Doe",
-            Prenom = "John",
+            Name = "Doe",
+            FirstName = "John",
             Email = "john.doe@example.com",
-            Statut = "MembreEquipe",
-            Pole = "Logistique",
+            Status = "TeamMember",
+            Pole = "Logistics",
             ResetToken = "",
             ResetTokenExpires = DateTime.Parse("2024-03-02"),
         };
-        employe4.SetMotDePasse("mdp1");
-        var employe5 = new Employe
+        employee4.SetPassword("mdp1");
+        Employee employee5 = new Employee
         {
-            Nom = "Smith",
-            Prenom = "Jane",
+            Name = "Smith",
+            FirstName = "Jane",
             Email = "jane.smith@example.com",
-            Statut = "MembreEquipe",
-            Pole = "Logistique",
+            Status = "TeamMember",
+            Pole = "Logistics",
             ResetToken = "",
             ResetTokenExpires = DateTime.Parse("2024-03-02"),
         };
-        employe5.SetMotDePasse("mdp3");
+        employee5.SetPassword("mdp3");
 
-        context.AddRange(employe1, employe2, employe3, employe4, employe5);
+        context.AddRange(employee1, employee2, employee3, employee4, employee5);
 
-        if (context.Assignations.Any())
+        if (context.Assignments.Any())
         {
             return;
         }
-        var assignation1 = new Assignation
+        Assignment assignment1 = new Assignment
         {
-            IdEmploye = 1,
-            IdTache = 1,
-            Message = "A faire le plus vite possible, quitte à mettre en pause les autres taches",
+            IdEmployee = 1,
+            IdTask = 1,
+            Message = "A faire le plus vite possible, quitte à mettre en pause les autres tasks",
         };
-        var assignation2 = new Assignation
+        Assignment assignment2 = new Assignment
         {
-            IdEmploye = 1,
-            IdTache = 3,
-            Message = "A faire le plus vite possible, quitte à mettre en pause les autres taches",
+            IdEmployee = 1,
+            IdTask = 3,
+            Message = "A faire le plus vite possible, quitte à mettre en pause les autres tasks",
         };
-        var assignation3 = new Assignation
+        Assignment assignment3 = new Assignment
         {
-            IdEmploye = 2,
-            IdTache = 4,
-            Message = "A faire le plus vite possible, quitte à mettre en pause les autres taches",
+            IdEmployee = 2,
+            IdTask = 4,
+            Message = "A faire le plus vite possible, quitte à mettre en pause les autres tasks",
         };
-        var assignation4 = new Assignation
+        Assignment assignment4 = new Assignment
         {
-            IdEmploye = 3,
-            IdTache = 2,
-            Message = "A faire le plus vite possible, quitte à mettre en pause les autres taches",
+            IdEmployee = 3,
+            IdTask = 2,
+            Message = "A faire le plus vite possible, quitte à mettre en pause les autres tasks",
         };
-        var assignation5 = new Assignation
+        Assignment assignment5 = new Assignment
         {
-            IdEmploye = 3,
-            IdTache = 3,
-            Message = "A faire le plus vite possible, quitte à mettre en pause les autres taches",
+            IdEmployee = 3,
+            IdTask = 3,
+            Message = "A faire le plus vite possible, quitte à mettre en pause les autres tasks",
         };
-        var assignation6 = new Assignation
+        Assignment assignment6 = new Assignment
         {
-            IdEmploye = 5,
-            IdTache = 4,
-            Message = "A faire le plus vite possible, quitte à mettre en pause les autres taches",
+            IdEmployee = 5,
+            IdTask = 4,
+            Message = "A faire le plus vite possible, quitte à mettre en pause les autres tasks",
         };
 
-        context.Assignations.AddRange(assignation1, assignation2, assignation3, assignation4, assignation5, assignation6);
+        context.Assignments.AddRange(assignment1, assignment2, assignment3, assignment4, assignment5, assignment6);
 
-        var conge1 = new Conge
+        Holiday holiday1 = new Holiday
         {
-            IdEmploye = 1,
+            IdEmployee = 1,
             Date = DateTime.Now.AddDays(30),
-            Duree = 2,
-            Motif = "Vacances",
+            Duration = 2,
+            Reason = "Vacances",
         };
-        var conge2 = new Conge
+        Holiday holiday2 = new Holiday
         {
-            IdEmploye = 2,
+            IdEmployee = 2,
             Date = DateTime.Now.AddDays(60),
-            Duree = 1.8,
-            Motif = "Congé personnel",
+            Duration = 1.8,
+            Reason = "Congé personnel",
         };
-        var conge3 = new Conge
+        Holiday holiday3 = new Holiday
         {
-            IdEmploye = 3,
+            IdEmployee = 3,
             Date = DateTime.Now.AddDays(60),
-            Duree = 5.8,
-            Motif = "Voyage",
+            Duration = 5.8,
+            Reason = "Voyage",
         };
-        var conge4 = new Conge
+        Holiday holiday4 = new Holiday
         {
-            IdEmploye = 1,
+            IdEmployee = 1,
             Date = DateTime.Now.AddDays(60),
-            Duree = 60,
-            Motif = "Congé sabattique",
+            Duration = 60,
+            Reason = "Congé sabattique",
         };
 
-        context.Conges.AddRange(conge1, conge2, conge3, conge4);
+        context.Holidays.AddRange(holiday1, holiday2, holiday3, holiday4);
 
         context.SaveChanges();
     }

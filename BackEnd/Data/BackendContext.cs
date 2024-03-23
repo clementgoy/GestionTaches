@@ -1,13 +1,11 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-
 
 public class BackendContext : DbContext
 {
-    public DbSet<Assignation> Assignations { get; set; } = null!;
-    public DbSet<Conge> Conges { get; set; } = null!;
-    public DbSet<Employe> Employes { get; set; } = null!;
-    public DbSet<Tache> Taches { get; set; } = null!;
+    public DbSet<Assignment> Assignments { get; set; } = null!;
+    public DbSet<Holiday> Holidays { get; set; } = null!;
+    public DbSet<Employee> Employees { get; set; } = null!;
+    public DbSet<Task> Tasks { get; set; } = null!;
 
 
     public string DbPath { get; private set; }

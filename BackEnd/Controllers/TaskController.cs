@@ -14,7 +14,7 @@ public class taskController : ControllerBase
     }
 
 
-    // GET: api/Tasks
+    // GET: api/tasks
     [Authorize(Roles = "Manager")]
     [HttpGet]
     public async Task<ActionResult<IEnumerable<TaskDTO>>> GetTasks()
@@ -38,9 +38,9 @@ public class taskController : ControllerBase
     }
 
 
-    // GET : api/Tasks/byEmploye/3
+    // GET : api/tasks/byEmployee/3
     [Authorize]
-    [HttpGet("byEmploye/{idEmploye}")]
+    [HttpGet("byEmployee/{idEmployee}")]
     public async Task<ActionResult<IEnumerable<TaskDTO>>> GetTasksByEmployeId(int idEmployee)
     {
 
@@ -78,7 +78,7 @@ public class taskController : ControllerBase
     }
 
 
-    // DELETE: api/Tasks/2
+    // DELETE: api/tasks/2
     [Authorize(Roles = "Manager")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteTask(int id)

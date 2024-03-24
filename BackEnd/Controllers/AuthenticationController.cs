@@ -8,13 +8,13 @@ using Microsoft.IdentityModel.Tokens;
 
 [Route("api/[controller]")]
 [ApiController]
-public class AuthentificationController : ControllerBase
+public class AuthenticationController : ControllerBase
 {
     private readonly BackendContext _context;
     private readonly IConfiguration _configuration;
-    private readonly ILogger<AuthentificationController> _logger;
+    private readonly ILogger<AuthenticationController> _logger;
 
-    public AuthentificationController(BackendContext context, IConfiguration configuration, ILogger<AuthentificationController> logger)
+    public AuthenticationController(BackendContext context, IConfiguration configuration, ILogger<AuthenticationController> logger)
     {
         _context = context;
         _configuration = configuration;

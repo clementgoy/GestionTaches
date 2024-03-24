@@ -114,3 +114,85 @@ RETURNING 1;
 2024-03-24 21:21:20.707 +01:00 [INF] Executed endpoint 'ForgetPasswordController.ResetPassword (BackEnd)'
 2024-03-24 21:21:20.709 +01:00 [INF] Request finished HTTP/1.1 POST http://localhost:5138/api/forgetpassword/reset-password - 200 null text/plain; charset=utf-8 286.9277ms
 2024-03-24 21:21:40.608 +01:00 [INF] Application is shutting down...
+2024-03-24 21:23:28.317 +01:00 [INF] User profile is available. Using 'C:\Users\clem7\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-03-24 21:23:28.395 +01:00 [INF] Now listening on: http://localhost:5138
+2024-03-24 21:23:28.399 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-03-24 21:23:28.401 +01:00 [INF] Hosting environment: Development
+2024-03-24 21:23:28.402 +01:00 [INF] Content root path: C:\Users\clem7\OneDrive\Documents\ENSC\Projets\PII\GestionTaches\BackEnd
+2024-03-24 21:23:32.105 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5138/swagger/index.html - null null
+2024-03-24 21:23:32.178 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5138/swagger/index.html - 200 null text/html;charset=utf-8 72.4917ms
+2024-03-24 21:23:32.427 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5138/swagger/v1/swagger.json - null null
+2024-03-24 21:23:32.540 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5138/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 112.7881ms
+2024-03-24 21:24:00.166 +01:00 [INF] Request starting HTTP/1.1 POST http://localhost:5138/api/Authentification/login - application/json 53
+2024-03-24 21:24:00.181 +01:00 [INF] CORS policy execution successful.
+2024-03-24 21:24:00.217 +01:00 [WRN] Failed to determine the https port for redirect.
+2024-03-24 21:24:00.257 +01:00 [INF] Executing endpoint 'AuthentificationController.Login (BackEnd)'
+2024-03-24 21:24:00.277 +01:00 [INF] Route matched with {action = "Login", controller = "Authentification"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(AuthenticationRequest) on controller AuthentificationController (BackEnd).
+2024-03-24 21:24:00.310 +01:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2024-03-24 21:24:00.331 +01:00 [INF] Executed action AuthentificationController.Login (BackEnd) in 48.7716ms
+2024-03-24 21:24:00.334 +01:00 [INF] Executed endpoint 'AuthentificationController.Login (BackEnd)'
+2024-03-24 21:24:00.339 +01:00 [INF] Request finished HTTP/1.1 POST http://localhost:5138/api/Authentification/login - 400 null application/problem+json; charset=utf-8 173.3249ms
+2024-03-24 21:24:07.814 +01:00 [INF] Request starting HTTP/1.1 POST http://localhost:5138/api/Authentification/login - application/json 53
+2024-03-24 21:24:07.818 +01:00 [INF] CORS policy execution successful.
+2024-03-24 21:24:07.822 +01:00 [INF] Executing endpoint 'AuthentificationController.Login (BackEnd)'
+2024-03-24 21:24:07.824 +01:00 [INF] Route matched with {action = "Login", controller = "Authentification"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(AuthenticationRequest) on controller AuthentificationController (BackEnd).
+2024-03-24 21:24:07.840 +01:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2024-03-24 21:24:07.844 +01:00 [INF] Executed action AuthentificationController.Login (BackEnd) in 15.4388ms
+2024-03-24 21:24:07.849 +01:00 [INF] Executed endpoint 'AuthentificationController.Login (BackEnd)'
+2024-03-24 21:24:07.852 +01:00 [INF] Request finished HTTP/1.1 POST http://localhost:5138/api/Authentification/login - 400 null application/problem+json; charset=utf-8 38.1845ms
+2024-03-24 21:29:45.641 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5138/swagger/index.html - null null
+2024-03-24 21:29:45.645 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5138/swagger/index.html - 200 null text/html;charset=utf-8 4.3624ms
+2024-03-24 21:29:45.786 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5138/swagger/v1/swagger.json - null null
+2024-03-24 21:29:45.808 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5138/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 22.4071ms
+2024-03-24 21:30:09.929 +01:00 [INF] Request starting HTTP/1.1 POST http://localhost:5138/api/Authentification/login - application/json 53
+2024-03-24 21:30:09.934 +01:00 [INF] CORS policy execution successful.
+2024-03-24 21:30:09.937 +01:00 [INF] Executing endpoint 'AuthentificationController.Login (BackEnd)'
+2024-03-24 21:30:09.939 +01:00 [INF] Route matched with {action = "Login", controller = "Authentification"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(AuthenticationRequest) on controller AuthentificationController (BackEnd).
+2024-03-24 21:30:09.947 +01:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2024-03-24 21:30:09.950 +01:00 [INF] Executed action AuthentificationController.Login (BackEnd) in 7.0314ms
+2024-03-24 21:30:09.951 +01:00 [INF] Executed endpoint 'AuthentificationController.Login (BackEnd)'
+2024-03-24 21:30:09.954 +01:00 [INF] Request finished HTTP/1.1 POST http://localhost:5138/api/Authentification/login - 400 null application/problem+json; charset=utf-8 23.9717ms
+2024-03-24 21:31:30.017 +01:00 [INF] Application is shutting down...
+2024-03-24 21:31:35.972 +01:00 [INF] User profile is available. Using 'C:\Users\clem7\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-03-24 21:31:36.066 +01:00 [INF] Now listening on: http://localhost:5138
+2024-03-24 21:31:36.071 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-03-24 21:31:36.073 +01:00 [INF] Hosting environment: Development
+2024-03-24 21:31:36.074 +01:00 [INF] Content root path: C:\Users\clem7\OneDrive\Documents\ENSC\Projets\PII\GestionTaches\BackEnd
+2024-03-24 21:31:38.303 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5138/swagger/index.html - null null
+2024-03-24 21:31:38.373 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5138/swagger/index.html - 200 null text/html;charset=utf-8 71.3556ms
+2024-03-24 21:31:38.531 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5138/swagger/v1/swagger.json - null null
+2024-03-24 21:31:38.625 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5138/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 94.0753ms
+2024-03-24 21:31:41.256 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5138/swagger/index.html - null null
+2024-03-24 21:31:41.260 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5138/swagger/index.html - 200 null text/html;charset=utf-8 4.2673ms
+2024-03-24 21:31:41.325 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5138/swagger/v1/swagger.json - null null
+2024-03-24 21:31:41.351 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5138/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 26.289ms
+2024-03-24 21:32:04.361 +01:00 [INF] Request starting HTTP/1.1 POST http://localhost:5138/api/Authentication/login - application/json 53
+2024-03-24 21:32:04.367 +01:00 [INF] CORS policy execution successful.
+2024-03-24 21:32:04.403 +01:00 [WRN] Failed to determine the https port for redirect.
+2024-03-24 21:32:04.455 +01:00 [INF] Executing endpoint 'AuthenticationController.Login (BackEnd)'
+2024-03-24 21:32:04.486 +01:00 [INF] Route matched with {action = "Login", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(AuthenticationRequest) on controller AuthenticationController (BackEnd).
+2024-03-24 21:32:04.662 +01:00 [INF] Executed DbCommand (9ms) [Parameters=[@__request_Email_0='?' (Size = 15)], CommandType='"Text"', CommandTimeout='30']
+SELECT "e"."Id", "e"."Email", "e"."FirstName", "e"."HashedPassword", "e"."Name", "e"."Pole", "e"."ResetToken", "e"."ResetTokenExpires", "e"."Status"
+FROM "Employees" AS "e"
+WHERE "e"."Email" = @__request_Email_0
+LIMIT 1
+2024-03-24 21:32:05.119 +01:00 [INF] User cgoy001@ensc.fr successfully logged in.
+2024-03-24 21:32:05.173 +01:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2024-03-24 21:32:05.186 +01:00 [INF] Executed action AuthenticationController.Login (BackEnd) in 692.8296ms
+2024-03-24 21:32:05.189 +01:00 [INF] Executed endpoint 'AuthenticationController.Login (BackEnd)'
+2024-03-24 21:32:05.198 +01:00 [INF] Request finished HTTP/1.1 POST http://localhost:5138/api/Authentication/login - 200 null application/json; charset=utf-8 837.1304ms
+2024-03-24 21:32:11.725 +01:00 [INF] Request starting HTTP/1.1 POST http://localhost:5138/api/Authentication/login - application/json 53
+2024-03-24 21:32:11.729 +01:00 [INF] CORS policy execution successful.
+2024-03-24 21:32:11.732 +01:00 [INF] Executing endpoint 'AuthenticationController.Login (BackEnd)'
+2024-03-24 21:32:11.733 +01:00 [INF] Route matched with {action = "Login", controller = "Authentication"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(AuthenticationRequest) on controller AuthenticationController (BackEnd).
+2024-03-24 21:32:11.753 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[@__request_Email_0='?' (Size = 15)], CommandType='"Text"', CommandTimeout='30']
+SELECT "e"."Id", "e"."Email", "e"."FirstName", "e"."HashedPassword", "e"."Name", "e"."Pole", "e"."ResetToken", "e"."ResetTokenExpires", "e"."Status"
+FROM "Employees" AS "e"
+WHERE "e"."Email" = @__request_Email_0
+LIMIT 1
+2024-03-24 21:32:12.058 +01:00 [WRN] Failed login attempt for cgoy001@ensc.fr
+2024-03-24 21:32:12.060 +01:00 [INF] Executing UnauthorizedObjectResult, writing value of type 'System.String'.
+2024-03-24 21:32:12.061 +01:00 [INF] Executed action AuthenticationController.Login (BackEnd) in 326.5661ms
+2024-03-24 21:32:12.063 +01:00 [INF] Executed endpoint 'AuthenticationController.Login (BackEnd)'
+2024-03-24 21:32:12.064 +01:00 [INF] Request finished HTTP/1.1 POST http://localhost:5138/api/Authentication/login - 401 null text/plain; charset=utf-8 339.3191ms
+2024-03-24 21:32:19.004 +01:00 [INF] Application is shutting down...

@@ -3,7 +3,6 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
 [Route("api/[controller]")]
@@ -12,7 +11,8 @@ public class AuthentificationController : ControllerBase
 {
     private readonly BackendContext _context;
     private readonly IConfiguration _configuration;
-
+    
+    // Constructor initializes the database context and configuration settings
     public AuthentificationController(BackendContext context, IConfiguration configuration)
     {
         _context = context;
@@ -22,6 +22,7 @@ public class AuthentificationController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Connexion([FromBody] AuthentificationRequest request)
     {
+        // Validates the request model
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
@@ -35,6 +36,7 @@ public class AuthentificationController : ControllerBase
             return Unauthorized("Email ou mot de passe incorrect");
         }
 
+        // Generates a JWT token for the authenticated user
         var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]));
         var tokenHandler = new JwtSecurityTokenHandler();
         var role = user.Status; 

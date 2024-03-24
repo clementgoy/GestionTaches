@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
-using System.Text;
 
 [ApiController]
 [Route("api/assignment")]
@@ -9,18 +8,10 @@ public class AssignmentController : ControllerBase
 {
     private readonly BackendContext _context;
 
+    // Injects the database context through the constructor
     public AssignmentController(BackendContext context)
     {
         _context = context;
-    }
-
-    private string HashId(int id)
-    {
-        using (var sha256 = System.Security.Cryptography.SHA256.Create())
-        {
-            byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(id.ToString()));
-            return Convert.ToBase64String(hashedBytes);
-        }
     }
 
     // GET: api/assignment/1
@@ -32,10 +23,10 @@ public class AssignmentController : ControllerBase
 
         if (assignment == null)
         {
-            return NotFound();
+            return NotFound(); // Returns a 404 code if the assignment is not found
         }
 
-        return new AssignmentDTO(assignment);
+        return new AssignmentDTO(assignment); // Converts the assignment to a DTO for the response
     }
 
 
@@ -44,19 +35,21 @@ public class AssignmentController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<AssignmentDTO>> PostAssignment(AssignmentDTO assignmentDTO)
     {
+        // Validates the request model
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
 
+        // Additional checks to ensure that both the employee and the task exist
         if (!_context.Employees.Any(e => e.Id == assignmentDTO.IdEmployee))
         {
-            return BadRequest("L'employé spécifié n'existe pas.");
+            return BadRequest("The employee does not exist");
         }
 
         if (!_context.Tasks.Any(t => t.Id == assignmentDTO.IdTask))
         {
-            return BadRequest("La tâche spécifiée n'existe pas.");
+            return BadRequest("The task does not exist");
         }
 
         var assignment = new Assignment(assignmentDTO, _context);
@@ -72,6 +65,7 @@ public class AssignmentController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> PutAssignment(int id, AssignmentDTO assignmentDTO)
     {
+        // Validates the request model
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
@@ -91,12 +85,12 @@ public class AssignmentController : ControllerBase
 
         if (!_context.Employees.Any(e => e.Id == assignmentDTO.IdEmployee))
         {
-            return BadRequest("L'employé spécifié n'existe pas.");
+            return BadRequest("The employee does not exist");
         }
 
         if (!_context.Tasks.Any(t => t.Id == assignmentDTO.IdTask))
         {
-            return BadRequest("La tâche spécifiée n'existe pas.");
+            return BadRequest("The task does not exist");
         }
 
         assignment.Update(assignmentDTO);
@@ -107,7 +101,7 @@ public class AssignmentController : ControllerBase
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!AssignmentExists(id))
+            if (!_context.Assignments.Any(e => e.Id == id))
             {
                 return NotFound();
             }
@@ -117,8 +111,9 @@ public class AssignmentController : ControllerBase
             }
         }
 
-        return NoContent();
+        return NoContent(); // Indicates that the operation was successful with no content in the response
     }
+
 
     // DELETE: api/assignment
     [Authorize(Roles = "Manager")]
@@ -135,11 +130,6 @@ public class AssignmentController : ControllerBase
         _context.Assignments.Remove(assignment);
         await _context.SaveChangesAsync();
 
-        return NoContent();
-    }
-
-    private bool AssignmentExists(int id)
-    {
-        return _context.Assignments.Any(e => e.Id == id);
+        return NoContent(); // Indicates that the operation was successful with no content in the response
     }
 }

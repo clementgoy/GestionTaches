@@ -3,13 +3,14 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Net;
 using System.Net.Mail;
-using Newtonsoft.Json;
 
 [ApiController]
 [Route("api/forgetpassword")]
 public class ForgetPasswordController : ControllerBase
 {
     private readonly BackendContext _context;
+
+    // Constructor initializes the database context
     public ForgetPasswordController(BackendContext context)
     {
         _context = context;
@@ -18,30 +19,34 @@ public class ForgetPasswordController : ControllerBase
     [HttpPost("request-reset")]
     public async Task<IActionResult> RequestResetPassword(RequestReset model)
     {
+        // Validates the request model
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
 
+        // Attempts to find the user by email
         var user = await _context.Employees.FirstOrDefaultAsync(u => u.Email == model.Email);
-        if (user == null) return BadRequest("Utilisateur non trouvé");
+        if (user == null) return BadRequest("Employee not found");
 
-        // Générer un jeton unique
+        // Generates a unique reset token
         var token = Guid.NewGuid().ToString();
         user.ResetToken = token;
         user.ResetTokenExpires = DateTime.UtcNow.AddHours(1);
 
         await _context.SaveChangesAsync();
 
-        // Envoyer l'email
+        // Sends a reset email with the generated token
         var resetLink = $"http://localhost:8080/reset-password?token={token}";
         SendResetEmail(user.Email, resetLink);
 
-        return Ok("Email de réinitialisation envoyé.");
+        return Ok("Reset email sent");
     }
 
+    // Method for sending the reset email
     private void SendResetEmail(string email, string link)
     {
+        // SMTP client configuration
         var smtpClient = new SmtpClient("smtp.gmail.com")
         {
             Port = 587,
@@ -49,11 +54,12 @@ public class ForgetPasswordController : ControllerBase
             EnableSsl = true,
         };
 
+        // Constructs the email message
         var mailMessage = new MailMessage
         {
             From = new MailAddress("noreply@example.com"),
-            Subject = "Réinitialisation de votre mot de passe",
-            Body = $"Veuillez cliquer sur le lien suivant pour réinitialiser votre mot de passe: {link}",
+            Subject = "Password reset",
+            Body = $"Please click on the following link to reset your password : {link}",
             IsBodyHtml = true,
         };
 
@@ -70,9 +76,11 @@ public class ForgetPasswordController : ControllerBase
             return BadRequest(ModelState);
         }
 
+        // Find the user by reset token and ensure the token hasn't expired
         var user = _context.Employees.FirstOrDefault(u => u.ResetToken == model.Token && u.ResetTokenExpires > DateTime.UtcNow);
         if (user == null) return BadRequest("Invalid or expired token");
 
+        // Replace the password value 
         user.SetPassword(model.NewPassword);
         user.ResetToken = null;
         user.ResetTokenExpires = null;

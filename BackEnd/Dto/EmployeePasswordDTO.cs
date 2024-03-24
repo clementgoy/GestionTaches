@@ -45,7 +45,7 @@ public class EmployeePasswordDTO
         }
         else
         {
-            // Gérer le cas où la conversion échoue
+            // Handle the case where the conversion fails
             throw new ArgumentException("Invalid status");
         }
     }
@@ -57,7 +57,7 @@ public class EmployeePasswordDTO
         }
         else
         {
-            // Gérer le cas où la conversion échoue
+            // Handle the case where the conversion fails
             throw new ArgumentException("Invalid pole");
         }
     }

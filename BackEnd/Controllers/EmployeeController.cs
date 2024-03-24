@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Authorization;
 public class EmployeController : ControllerBase
 {
     private readonly BackendContext _context;
+
+    // Injects the database context
     public EmployeController(BackendContext context)
     {
         _context = context;
@@ -19,6 +21,7 @@ public class EmployeController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<EmployeeDTO>>> GetEmployees()
     {
+        // Projects each Employee entity to an EmployeeDTO and returns the list
         var employees = _context.Employees.Select(x => new EmployeeDTO(x));
 
         return await employees.ToListAsync();
@@ -29,6 +32,7 @@ public class EmployeController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<EmployeeDTO>> GetEmployee(int id)
     {
+        // Finds the employee by ID, returns 404 Not Found if not found
         var employee = await _context.Employees.SingleOrDefaultAsync(t => t.Id == id);
 
         if (employee == null)
@@ -42,17 +46,17 @@ public class EmployeController : ControllerBase
     [HttpGet("byTache/{idTask}")]
     public async Task<ActionResult<IEnumerable<EmployeeDTO>>> GetEmployeesByTacheId(int idTask)
     {
-        // Récupérer toutes les assignment qui correspondent à l'idTask donné
+        // Fetches all assignments that match the given task ID
         var assignment = await _context.Assignments
-            .Where(a => a.IdTask == idTask) // Supposons que vous avez idTask comme champ directement disponible
+            .Where(a => a.IdTask == idTask)
             .ToListAsync();
 
         if (assignment == null || assignment.Count == 0)
             return NotFound();
 
-        var employeeIds = assignment.Select(a => a.IdEmployee).ToList(); 
+        // Extracts employee IDs from the assignments and fetches corresponding employees
+        var employeeIds = assignment.Select(a => a.IdEmployee).ToList();
 
-        // Utiliser les ID employé pour récupérer les employés correspondants
         var employees = await _context.Employees
             .Where(e => employeeIds.Contains(e.Id))
             .Select(e => new EmployeeDTO(e))
@@ -68,6 +72,7 @@ public class EmployeController : ControllerBase
     [HttpGet("byEmail{email}")]
     public async Task<ActionResult<EmployeeDTO>> GetEmployeeByEmail(string email)
     {
+        // Finds the employee by email, returns 404 Not Found if not found
         var employee = await _context.Employees.SingleOrDefaultAsync(e => e.Email == email);
 
         if (employee == null)
@@ -82,27 +87,32 @@ public class EmployeController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Employee>> PostEmployee(EmployeePasswordDTO employeePasswordDTO)
     {
+        // Validates the request model
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
 
+        // Validates the provided password
         if (!IsPasswordValid(employeePasswordDTO.Password))
         {
             return BadRequest("Le mot de passe doit contenir au moins un caractère et un chiffre.");
         }
 
+        // Creates a new Employee entity from the provided DTO and sets its password
         Employee employee = new Employee(employeePasswordDTO, _context);
         employee.SetPassword(employeePasswordDTO.Password);
 
         _context.Employees.Add(employee);
         await _context.SaveChangesAsync();
 
+        // Returns the newly created employee
         return CreatedAtAction(nameof(GetEmployee), new { id = employee.Id }, new EmployeeDTO(employee));
     }
+
+    // Validates the provided password
     private bool IsPasswordValid(string Password)
     {
-        // Exemple de validation : Au moins un caractère et un chiffre
         return !string.IsNullOrWhiteSpace(Password) && Password.Any(char.IsLetter) && Password.Any(char.IsDigit);
     }
 
@@ -112,18 +122,20 @@ public class EmployeController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteEmployeeItem(int id)
     {
-        var employe = await _context.Employees.FindAsync(id);
+        // Finds the employee by ID, returns 404 Not Found if not found
+        var employee = await _context.Employees.FindAsync(id);
 
-        if (employe == null)
+        if (employee == null)
             return NotFound();
 
+        // Removes any assignments associated with the employee and the employee itself, then saves changes
         var assignment = _context.Assignments.Where(a => a.IdEmployee == id);
         _context.Assignments.RemoveRange(assignment);
 
-        _context.Employees.Remove(employe);
+        _context.Employees.Remove(employee);
         await _context.SaveChangesAsync();
 
-        return NoContent();
+        return NoContent(); // Indicates successful deletion with no content in the response
     }
 
 
@@ -132,29 +144,31 @@ public class EmployeController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> PutEmployee(int id, EmployeeDTO employeDTO)
     {
+        // Validates the request model
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
 
+        // Ensures the ID from the URL matches the ID in the DTO
         if (id != employeDTO.Id)
             return BadRequest();
 
-        // Récupérer l'employé existant
-        Employee existingEmploye = await _context.Employees.FindAsync(id);
+        // Attempts to find the existing employee by ID
+        Employee existingEmployee = await _context.Employees.FindAsync(id);
 
-        if (existingEmploye == null)
+        if (existingEmployee == null)
             return NotFound();
 
-        // Update of the properties without changing the password
-        existingEmploye.Name = employeDTO.Name;
-        existingEmploye.FirstName = employeDTO.FirstName;
-        existingEmploye.Email = employeDTO.Email;
-        existingEmploye.Status = employeDTO.Status.ToString();
-        existingEmploye.Pole = employeDTO.Pole.ToString();
+        // Updates the existing employee's properties with the values from the DTO
+        existingEmployee.Name = employeDTO.Name;
+        existingEmployee.FirstName = employeDTO.FirstName;
+        existingEmployee.Email = employeDTO.Email;
+        existingEmployee.Status = employeDTO.Status.ToString();
+        existingEmployee.Pole = employeDTO.Pole.ToString();
 
-        // Mettre à jour l'employé dans le contexte et sauvegarder les modifications
-        _context.Entry(existingEmploye).State = EntityState.Modified;
+        // Marks the entity as modified to ensure the changes are updated in the database
+        _context.Entry(existingEmployee).State = EntityState.Modified;
 
         try
         {
@@ -168,14 +182,18 @@ public class EmployeController : ControllerBase
                 throw;
         }
 
-        return NoContent();
+        return NoContent(); // Indicates successful update with no content in the response
     }
 
+    // Generates a base64-encoded hash of the given integer ID using SHA256
     private string HashId(int id)
     {
         using (var sha256 = System.Security.Cryptography.SHA256.Create())
         {
+            // Converts the ID to a byte array and computes its hash
             byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(id.ToString()));
+
+            //Converts the hash to a base64 string and returns it
             return Convert.ToBase64String(hashedBytes);
         }
     }

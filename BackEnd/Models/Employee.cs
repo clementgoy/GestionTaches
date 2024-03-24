@@ -24,20 +24,20 @@ public class Employee
     {
         if (IsPasswordValid(password))
         {
-            // Hacher le mot de passe avant de le stocker
+            // Hash the password before storing it
             this.HashedPassword = BCrypt.Net.BCrypt.HashPassword(password);
 
         }
         else
         {
-            // Gérer le cas où la validation échoue
+            // Handle the case where the user does not enter a correct password
             throw new ArgumentException("The password must contain at least one character and one number.");
         }
     }
 
     private bool IsPasswordValid(string password)
     {
-        // Exemple de validation : Au moins un caractère et un chiffre
+        // Validation method for the password
         return !string.IsNullOrWhiteSpace(password) && password.Any(char.IsLetter) && password.Any(char.IsDigit);
     }
 }

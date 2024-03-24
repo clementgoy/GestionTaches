@@ -9,12 +9,12 @@ public class Authentification
 
     public bool VerifyCredentials(string email, string password)
     {
-        // Récupérer l'utilisateur depuis la base de données en fonction de l'email
+        // Get user from database based on email
         Employee employee = _userRepository.GetUserByEmail(email);
 
         if (employee != null)
         {
-            // Utiliser BCrypt pour vérifier si le mot de passe correspond
+            // Use BCrypt to check if the password matches
             return BCrypt.Net.BCrypt.Verify(password, employee.HashedPassword);
         }
 

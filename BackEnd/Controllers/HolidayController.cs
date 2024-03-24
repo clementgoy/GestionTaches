@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Authorization;
 public class HolidayController : ControllerBase
 {
     private readonly BackendContext _context;
+
+    // Initializes the controller with the database context
     public HolidayController(BackendContext context)
     {
         _context = context;
@@ -17,6 +19,7 @@ public class HolidayController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<HolidayDTO>>> GetHolidays()
     {
+        // Projects each Holiday entity to a HolidayDTO
         var holidays = _context.Holidays.Select(x => new HolidayDTO(x));
 
         return await holidays.ToListAsync();
@@ -27,6 +30,7 @@ public class HolidayController : ControllerBase
     [HttpGet("Holiday/{id}")]
     public async Task<ActionResult<HolidayDTO>> GetHoliday(int id)
     {
+        // Attempts to find the holiday by ID
         var holiday = await _context.Holidays.SingleOrDefaultAsync(t => t.Id == id);
 
         if (holiday == null)
@@ -37,11 +41,12 @@ public class HolidayController : ControllerBase
 
     // GET : api/Holiday/byEmploye/{hashedId}
     [Authorize]
-    [HttpGet("byEmploye/{idEmploye}")]
-    public async Task<ActionResult<IEnumerable<HolidayDTO>>> GetHolidaysByEmployeId(int idEmploye)
+    [HttpGet("byEmployee/{idEmployee}")]
+    public async Task<ActionResult<IEnumerable<HolidayDTO>>> GetHolidaysByEmployeeId(int idEmployee)
     {
+        // Fetches holidays that are linked to the specified employee ID
         var holidays = await _context.Holidays
-            .Where(c => c.IdEmployee == idEmploye)
+            .Where(c => c.IdEmployee == idEmployee)
             .ToListAsync();
 
         if (holidays == null || holidays.Count == 0)
@@ -54,66 +59,71 @@ public class HolidayController : ControllerBase
     // POST: api/Holiday
     [Authorize(Roles = "Manager")]
     [HttpPost]
-    public async Task<ActionResult<Holiday>> PostHoliday(HolidayDTO HolidayDTO)
+    public async Task<ActionResult<Holiday>> PostHoliday(HolidayDTO holidayDTO)
     {
+        // Validates the received model
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
 
-        Holiday Holiday = new Holiday(HolidayDTO, _context);
+        // Creates a new Holiday entity from the DTO and adds it to the context
+        Holiday holiday = new Holiday(holidayDTO, _context);
 
-        _context.Holidays.Add(Holiday);
+        _context.Holidays.Add(holiday);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction(nameof(GetHoliday), new { id = Holiday.Id }, new HolidayDTO(Holiday));
+        return CreatedAtAction(nameof(GetHoliday), new { id = holiday.Id }, new HolidayDTO(holiday));
     }
 
 
     // DELETE: api/Holiday/2
-    [Authorize]
+    [Authorize(Roles = "Manager")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteHoliday(int id)
     {
-        var Holiday = await _context.Holidays.FindAsync(id);
+        var holiday = await _context.Holidays.FindAsync(id);
 
-        if (Holiday == null)
+        if (holiday == null)
             return NotFound();
 
-        _context.Holidays.Remove(Holiday);
+        _context.Holidays.Remove(holiday);
         await _context.SaveChangesAsync();
 
-        return NoContent();
+        return NoContent(); // Indicates successful deletion with no content in the response
     }
 
 
     // PUT: api/Holiday/2
     [Authorize(Roles = "Manager")]
-    [Authorize(Roles = "Manager")]
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutHoliday(int id, HolidayDTO HolidayDTO)
+    public async Task<IActionResult> PutHoliday(int id, HolidayDTO holidayDTO)
     {
+        // Validates the received model
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
 
-        if (id != HolidayDTO.Id)
+        // Checks if the ID in the DTO matches the ID in the URL
+        if (id != holidayDTO.Id)
         {
-            return BadRequest("L'ID du congé ne correspond pas à celui dans l'URL.");
+            return BadRequest("The holiday id does not match with the one in the URL");
         }
 
+        // Attempts to find the existing holiday to update
         var existingHoliday = await _context.Holidays.FindAsync(id);
 
         if (existingHoliday == null)
         {
-            return NotFound($"Aucun congé trouvé avec l'ID {id}.");
+            return NotFound("Holiday not found");
         }
 
-        existingHoliday.IdEmployee = HolidayDTO.IdEmployee;
-        existingHoliday.Duration = HolidayDTO.Duration;
-        existingHoliday.Date = HolidayDTO.Date;
-        existingHoliday.Reason = HolidayDTO.Reason;
+        // Updates the existing holiday's properties with values from the DTO
+        existingHoliday.IdEmployee = holidayDTO.IdEmployee;
+        existingHoliday.Duration = holidayDTO.Duration;
+        existingHoliday.Date = holidayDTO.Date;
+        existingHoliday.Reason = holidayDTO.Reason;
 
         try
         {
@@ -121,16 +131,17 @@ public class HolidayController : ControllerBase
         }
         catch (DbUpdateConcurrencyException)
         {
+            // Checks if the holiday still exists
             if (!_context.Holidays.Any(e => e.Id == id))
             {
                 return NotFound();
             }
             else
             {
-                throw;
+                throw; // Re-throws the exception for unhandled cases
             }
         }
 
-        return NoContent();
+        return NoContent(); // Indicates successful update with no content in the response
     }
 }

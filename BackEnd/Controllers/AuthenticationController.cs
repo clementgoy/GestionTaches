@@ -23,7 +23,7 @@ public class AuthentificationController : ControllerBase
 
 
     [HttpPost("login")]
-    public async Task<IActionResult> Login([FromBody] AuthentificationRequest request)
+    public async Task<IActionResult> Login([FromBody] AuthenticationRequest request)
     {
         if (!ModelState.IsValid)
         {

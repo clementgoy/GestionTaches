@@ -30,7 +30,8 @@ public class ForgetPasswordController : ControllerBase
         if (user == null) return BadRequest("Employee not found");
 
         // Generates a unique reset token
-        var token = Guid.NewGuid().ToString();
+        var token = GenerateToken();
+
         user.ResetToken = token;
         user.ResetTokenExpires = DateTime.UtcNow.AddHours(1);
 
@@ -88,6 +89,16 @@ public class ForgetPasswordController : ControllerBase
         await _context.SaveChangesAsync();
 
         return Ok("Password updated");
+    }
+
+    public static string GenerateToken()
+    {
+        using (var rng = new System.Security.Cryptography.RNGCryptoServiceProvider())
+        {
+            byte[] tokenData = new byte[32]; // Create 256 bits token
+            rng.GetBytes(tokenData);
+            return Convert.ToBase64String(tokenData);
+        }
     }
 
 }

@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-public class AuthentificationRequest
+public class AuthenticationRequest
 {
     [Required]
     [EmailAddress]

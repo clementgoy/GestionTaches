@@ -286,3 +286,6 @@ C:\Users\clem7\OneDrive\Documents\ENSC\Projets\PII\GestionTaches\BackEnd\bin\Deb
 C:\Users\clem7\OneDrive\Documents\ENSC\Projets\PII\GestionTaches\BackEnd\bin\Debug\net8.0\Serilog.Sinks.Console.dll
 C:\Users\clem7\OneDrive\Documents\ENSC\Projets\PII\GestionTaches\BackEnd\bin\Debug\net8.0\Serilog.Sinks.Debug.dll
 C:\Users\clem7\OneDrive\Documents\ENSC\Projets\PII\GestionTaches\BackEnd\bin\Debug\net8.0\Serilog.Sinks.File.dll
+C:\Users\clem7\OneDrive\Documents\ENSC\Projets\PII\GestionTaches\BackEnd\bin\Debug\net8.0\AngleSharp.dll
+C:\Users\clem7\OneDrive\Documents\ENSC\Projets\PII\GestionTaches\BackEnd\bin\Debug\net8.0\AngleSharp.Css.dll
+C:\Users\clem7\OneDrive\Documents\ENSC\Projets\PII\GestionTaches\BackEnd\bin\Debug\net8.0\HtmlSanitizer.dll

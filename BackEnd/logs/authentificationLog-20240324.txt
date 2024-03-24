@@ -22,3 +22,95 @@ LIMIT 1
 2024-03-24 17:19:25.232 +01:00 [INF] Executed endpoint 'AuthentificationController.Login (BackEnd)'
 2024-03-24 17:19:25.245 +01:00 [INF] Request finished HTTP/1.1 POST http://localhost:5138/api/Authentification/login - 200 null application/json; charset=utf-8 813.5556ms
 2024-03-24 17:31:21.581 +01:00 [INF] Application is shutting down...
+2024-03-24 21:01:38.308 +01:00 [INF] User profile is available. Using 'C:\Users\clem7\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-03-24 21:01:38.418 +01:00 [INF] Now listening on: http://localhost:5138
+2024-03-24 21:01:38.422 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-03-24 21:01:38.424 +01:00 [INF] Hosting environment: Development
+2024-03-24 21:01:38.425 +01:00 [INF] Content root path: C:\Users\clem7\OneDrive\Documents\ENSC\Projets\PII\GestionTaches\BackEnd
+2024-03-24 21:01:54.632 +01:00 [INF] Application is shutting down...
+2024-03-24 21:10:47.163 +01:00 [INF] User profile is available. Using 'C:\Users\clem7\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-03-24 21:10:47.288 +01:00 [INF] Now listening on: http://localhost:5138
+2024-03-24 21:10:47.291 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-03-24 21:10:47.293 +01:00 [INF] Hosting environment: Development
+2024-03-24 21:10:47.293 +01:00 [INF] Content root path: C:\Users\clem7\OneDrive\Documents\ENSC\Projets\PII\GestionTaches\BackEnd
+2024-03-24 21:11:16.589 +01:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5138/api/forgetpassword/request-reset - null null
+2024-03-24 21:11:16.641 +01:00 [WRN] Failed to determine the https port for redirect.
+2024-03-24 21:11:16.720 +01:00 [INF] Executing endpoint '405 HTTP Method Not Supported'
+2024-03-24 21:11:16.723 +01:00 [INF] Executed endpoint '405 HTTP Method Not Supported'
+2024-03-24 21:11:16.735 +01:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5138/api/forgetpassword/request-reset - 405 0 null 147.426ms
+2024-03-24 21:11:36.537 +01:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5138/api/forgetpassword/request-reset - null null
+2024-03-24 21:11:36.542 +01:00 [INF] Executing endpoint '405 HTTP Method Not Supported'
+2024-03-24 21:11:36.543 +01:00 [INF] Executed endpoint '405 HTTP Method Not Supported'
+2024-03-24 21:11:36.543 +01:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5138/api/forgetpassword/request-reset - 405 0 null 6.2051ms
+2024-03-24 21:12:44.665 +01:00 [INF] Application is shutting down...
+2024-03-24 21:13:40.894 +01:00 [INF] User profile is available. Using 'C:\Users\clem7\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-03-24 21:13:40.999 +01:00 [INF] Now listening on: http://localhost:5138
+2024-03-24 21:13:41.002 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-03-24 21:13:41.004 +01:00 [INF] Hosting environment: Development
+2024-03-24 21:13:41.005 +01:00 [INF] Content root path: C:\Users\clem7\OneDrive\Documents\ENSC\Projets\PII\GestionTaches\BackEnd
+2024-03-24 21:14:00.532 +01:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5138/api/forgetpassword/request-reset - null null
+2024-03-24 21:14:00.541 +01:00 [INF] No CORS policy found for the specified request.
+2024-03-24 21:14:00.580 +01:00 [WRN] Failed to determine the https port for redirect.
+2024-03-24 21:14:00.649 +01:00 [INF] Executing endpoint '405 HTTP Method Not Supported'
+2024-03-24 21:14:00.653 +01:00 [INF] Executed endpoint '405 HTTP Method Not Supported'
+2024-03-24 21:14:00.657 +01:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5138/api/forgetpassword/request-reset - 405 0 null 127.4778ms
+2024-03-24 21:16:18.422 +01:00 [INF] Application is shutting down...
+2024-03-24 21:16:46.225 +01:00 [INF] User profile is available. Using 'C:\Users\clem7\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-03-24 21:16:46.311 +01:00 [INF] Now listening on: http://localhost:5138
+2024-03-24 21:16:46.315 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-03-24 21:16:46.318 +01:00 [INF] Hosting environment: Development
+2024-03-24 21:16:46.320 +01:00 [INF] Content root path: C:\Users\clem7\OneDrive\Documents\ENSC\Projets\PII\GestionTaches\BackEnd
+2024-03-24 21:18:13.982 +01:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5138/api/forgetpassword/request-reset - null null
+2024-03-24 21:18:13.997 +01:00 [INF] No CORS policy found for the specified request.
+2024-03-24 21:18:14.045 +01:00 [WRN] Failed to determine the https port for redirect.
+2024-03-24 21:18:14.109 +01:00 [INF] Executing endpoint '405 HTTP Method Not Supported'
+2024-03-24 21:18:14.112 +01:00 [INF] Executed endpoint '405 HTTP Method Not Supported'
+2024-03-24 21:18:14.121 +01:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5138/api/forgetpassword/request-reset - 405 0 null 139.4087ms
+2024-03-24 21:20:36.590 +01:00 [INF] Application is shutting down...
+2024-03-24 21:20:42.281 +01:00 [INF] User profile is available. Using 'C:\Users\clem7\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-03-24 21:20:42.377 +01:00 [INF] Now listening on: http://localhost:5138
+2024-03-24 21:20:42.380 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-03-24 21:20:42.382 +01:00 [INF] Hosting environment: Development
+2024-03-24 21:20:42.383 +01:00 [INF] Content root path: C:\Users\clem7\OneDrive\Documents\ENSC\Projets\PII\GestionTaches\BackEnd
+2024-03-24 21:20:50.645 +01:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5138/api/forgetpassword/request-reset - null null
+2024-03-24 21:20:50.654 +01:00 [INF] CORS policy execution successful.
+2024-03-24 21:20:50.661 +01:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5138/api/forgetpassword/request-reset - 204 null null 16.4287ms
+2024-03-24 21:20:50.669 +01:00 [INF] Request starting HTTP/1.1 POST http://localhost:5138/api/forgetpassword/request-reset - application/json 27
+2024-03-24 21:20:50.672 +01:00 [INF] CORS policy execution successful.
+2024-03-24 21:20:50.695 +01:00 [WRN] Failed to determine the https port for redirect.
+2024-03-24 21:20:50.728 +01:00 [INF] Executing endpoint 'ForgetPasswordController.RequestResetPassword (BackEnd)'
+2024-03-24 21:20:50.776 +01:00 [INF] Route matched with {action = "RequestResetPassword", controller = "ForgetPassword"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] RequestResetPassword(RequestReset) on controller ForgetPasswordController (BackEnd).
+2024-03-24 21:20:50.918 +01:00 [INF] Executed DbCommand (5ms) [Parameters=[@__model_Email_0='?' (Size = 15)], CommandType='"Text"', CommandTimeout='30']
+SELECT "e"."Id", "e"."Email", "e"."FirstName", "e"."HashedPassword", "e"."Name", "e"."Pole", "e"."ResetToken", "e"."ResetTokenExpires", "e"."Status"
+FROM "Employees" AS "e"
+WHERE "e"."Email" = @__model_Email_0
+LIMIT 1
+2024-03-24 21:20:51.030 +01:00 [INF] Executed DbCommand (5ms) [Parameters=[@p2='?' (DbType = Int32), @p0='?' (Size = 44), @p1='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Employees" SET "ResetToken" = @p0, "ResetTokenExpires" = @p1
+WHERE "Id" = @p2
+RETURNING 1;
+2024-03-24 21:20:52.072 +01:00 [INF] Executing OkObjectResult, writing value of type 'System.String'.
+2024-03-24 21:20:52.078 +01:00 [INF] Executed action ForgetPasswordController.RequestResetPassword (BackEnd) in 1296.8871ms
+2024-03-24 21:20:52.080 +01:00 [INF] Executed endpoint 'ForgetPasswordController.RequestResetPassword (BackEnd)'
+2024-03-24 21:20:52.087 +01:00 [INF] Request finished HTTP/1.1 POST http://localhost:5138/api/forgetpassword/request-reset - 200 null text/plain; charset=utf-8 1417.9594ms
+2024-03-24 21:21:20.415 +01:00 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5138/api/forgetpassword/reset-password - null null
+2024-03-24 21:21:20.419 +01:00 [INF] CORS policy execution successful.
+2024-03-24 21:21:20.419 +01:00 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5138/api/forgetpassword/reset-password - 204 null null 3.7059ms
+2024-03-24 21:21:20.422 +01:00 [INF] Request starting HTTP/1.1 POST http://localhost:5138/api/forgetpassword/reset-password - application/json 76
+2024-03-24 21:21:20.423 +01:00 [INF] CORS policy execution successful.
+2024-03-24 21:21:20.427 +01:00 [INF] Executing endpoint 'ForgetPasswordController.ResetPassword (BackEnd)'
+2024-03-24 21:21:20.434 +01:00 [INF] Route matched with {action = "ResetPassword", controller = "ForgetPassword"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ResetPassword(ResetPassword) on controller ForgetPasswordController (BackEnd).
+2024-03-24 21:21:20.465 +01:00 [INF] Executed DbCommand (3ms) [Parameters=[@__model_Token_0='?' (Size = 44)], CommandType='"Text"', CommandTimeout='30']
+SELECT "e"."Id", "e"."Email", "e"."FirstName", "e"."HashedPassword", "e"."Name", "e"."Pole", "e"."ResetToken", "e"."ResetTokenExpires", "e"."Status"
+FROM "Employees" AS "e"
+WHERE "e"."ResetToken" = @__model_Token_0 AND "e"."ResetTokenExpires" > rtrim(rtrim(strftime('%Y-%m-%d %H:%M:%f', 'now'), '0'), '.')
+LIMIT 1
+2024-03-24 21:21:20.690 +01:00 [INF] Executed DbCommand (2ms) [Parameters=[@p3='?' (DbType = Int32), @p0='?' (Size = 60), @p1='?', @p2='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Employees" SET "HashedPassword" = @p0, "ResetToken" = @p1, "ResetTokenExpires" = @p2
+WHERE "Id" = @p3
+RETURNING 1;
+2024-03-24 21:21:20.704 +01:00 [INF] Executing OkObjectResult, writing value of type 'System.String'.
+2024-03-24 21:21:20.706 +01:00 [INF] Executed action ForgetPasswordController.ResetPassword (BackEnd) in 270.7413ms
+2024-03-24 21:21:20.707 +01:00 [INF] Executed endpoint 'ForgetPasswordController.ResetPassword (BackEnd)'
+2024-03-24 21:21:20.709 +01:00 [INF] Request finished HTTP/1.1 POST http://localhost:5138/api/forgetpassword/reset-password - 200 null text/plain; charset=utf-8 286.9277ms
+2024-03-24 21:21:40.608 +01:00 [INF] Application is shutting down...

@@ -5,48 +5,53 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
+
 [Route("api/[controller]")]
 [ApiController]
 public class AuthentificationController : ControllerBase
 {
     private readonly BackendContext _context;
     private readonly IConfiguration _configuration;
-    
-    // Constructor initializes the database context and configuration settings
-    public AuthentificationController(BackendContext context, IConfiguration configuration)
+    private readonly ILogger<AuthentificationController> _logger;
+
+    public AuthentificationController(BackendContext context, IConfiguration configuration, ILogger<AuthentificationController> logger)
     {
         _context = context;
         _configuration = configuration;
+        _logger = logger;
     }
 
+
     [HttpPost("login")]
-    public async Task<IActionResult> Connexion([FromBody] AuthentificationRequest request)
+    public async Task<IActionResult> Login([FromBody] AuthentificationRequest request)
     {
-        // Validates the request model
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
 
-        var user = await _context.Employees
-            .FirstOrDefaultAsync(u => u.Email == request.Email);
+        // Attempt to retrieve the user
+        var user = await _context.Employees.FirstOrDefaultAsync(u => u.Email == request.Email);
 
         if (user == null || !BCrypt.Net.BCrypt.Verify(request.Password, user.HashedPassword))
         {
-            return Unauthorized("Email ou mot de passe incorrect");
+            _logger.LogWarning($"Failed login attempt for {request.Email}");
+            return Unauthorized("Incorrect email or password");
         }
+
+        _logger.LogInformation($"User {request.Email} successfully logged in.");
 
         // Generates a JWT token for the authenticated user
         var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]));
         var tokenHandler = new JwtSecurityTokenHandler();
-        var role = user.Status; 
+        var role = user.Status;
 
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(new[]
             {
                 new Claim(ClaimTypes.Name, user.Email),
-                new Claim(ClaimTypes.Role, role) 
+                new Claim(ClaimTypes.Role, role)
             }),
             Expires = DateTime.UtcNow.AddDays(2),
             SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature),

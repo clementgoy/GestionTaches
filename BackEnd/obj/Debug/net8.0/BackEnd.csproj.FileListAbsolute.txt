@@ -276,3 +276,13 @@ C:\Users\clem7\OneDrive\Documents\ENSC\Projets\PII\GestionTaches\BackEnd\bin\Deb
 C:\Users\clem7\OneDrive\Documents\ENSC\Projets\PII\GestionTaches\BackEnd\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\clem7\OneDrive\Documents\ENSC\Projets\PII\GestionTaches\BackEnd\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\clem7\OneDrive\Documents\ENSC\Projets\PII\GestionTaches\BackEnd\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\clem7\OneDrive\Documents\ENSC\Projets\PII\GestionTaches\BackEnd\bin\Debug\net8.0\AspNetCoreRateLimit.dll
+C:\Users\clem7\OneDrive\Documents\ENSC\Projets\PII\GestionTaches\BackEnd\bin\Debug\net8.0\Serilog.dll
+C:\Users\clem7\OneDrive\Documents\ENSC\Projets\PII\GestionTaches\BackEnd\bin\Debug\net8.0\Serilog.AspNetCore.dll
+C:\Users\clem7\OneDrive\Documents\ENSC\Projets\PII\GestionTaches\BackEnd\bin\Debug\net8.0\Serilog.Extensions.Hosting.dll
+C:\Users\clem7\OneDrive\Documents\ENSC\Projets\PII\GestionTaches\BackEnd\bin\Debug\net8.0\Serilog.Extensions.Logging.dll
+C:\Users\clem7\OneDrive\Documents\ENSC\Projets\PII\GestionTaches\BackEnd\bin\Debug\net8.0\Serilog.Formatting.Compact.dll
+C:\Users\clem7\OneDrive\Documents\ENSC\Projets\PII\GestionTaches\BackEnd\bin\Debug\net8.0\Serilog.Settings.Configuration.dll
+C:\Users\clem7\OneDrive\Documents\ENSC\Projets\PII\GestionTaches\BackEnd\bin\Debug\net8.0\Serilog.Sinks.Console.dll
+C:\Users\clem7\OneDrive\Documents\ENSC\Projets\PII\GestionTaches\BackEnd\bin\Debug\net8.0\Serilog.Sinks.Debug.dll
+C:\Users\clem7\OneDrive\Documents\ENSC\Projets\PII\GestionTaches\BackEnd\bin\Debug\net8.0\Serilog.Sinks.File.dll

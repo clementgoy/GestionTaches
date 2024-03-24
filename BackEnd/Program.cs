@@ -1,20 +1,32 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Security.Claims;
+using AspNetCoreRateLimit;
+using Serilog;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-SeedData.Init(); 
+SeedData.Init();
 
 // Add services to the container.
 builder.Services.AddDbContext<BackendContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("BackendDatabase")));
 
 builder.Services.AddControllers();
+
+builder.Services.AddMemoryCache();
+builder.Services.Configure<IpRateLimitOptions>(builder.Configuration.GetSection("IpRateLimiting"));
+builder.Services.AddInMemoryRateLimiting();
+builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+
+// Configure Serilog
+builder.Host.UseSerilog((ctx, lc) => lc
+    .WriteTo.Console()
+    .WriteTo.File("logs/authentificationLog-.txt", rollingInterval: RollingInterval.Day)
+    .ReadFrom.Configuration(ctx.Configuration));
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -75,6 +87,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseIpRateLimiting();
 
 app.UseHttpsRedirection();
 app.UseRouting();

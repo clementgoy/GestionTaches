@@ -2,6 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Login from '@/views/LoginView.vue';
 import ResetPassword from '@/views/ResetPassword.vue';
 import RequestResetPage from '@/views/RequestResetPage.vue';
+import HomePage from '@/views/HomePage.vue';
+import ListeTaches from '@/views/ListeTachesView.vue';
+import ListeCongesView from '@/views/ListeCongesView.vue';
 
 const routes = [
   {
@@ -16,12 +19,24 @@ const routes = [
   {
     path: '/reset-password',
     name: 'ResetPassword',
-    component: ResetPassword, // Assurez-vous que le chemin d'accès à votre composant est correct
+    component: ResetPassword, 
   },
   {
     path: '/request-reset',
     name: 'RequestReset',
     component: RequestResetPage,
+  },
+  { path: '/home', 
+    name: 'Home', 
+    component: HomePage 
+  },
+  { path: '/taches', 
+    name: 'Taches', 
+    component: ListeTaches 
+  },
+  { path: '/conges', 
+    name: 'Conges', 
+    component: ListeCongesView 
   },
 ];
 

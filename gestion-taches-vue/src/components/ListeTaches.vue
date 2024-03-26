@@ -1,12 +1,14 @@
-<!-- src/components/ListeTaches.vue -->
 <template>
-  <div>
-    <h1>Liste des Tâches</h1>
+  <div v-if="taches.length > 0">
     <ul>
       <li v-for="tache in taches" :key="tache.id">{{ tache.description }}</li>
     </ul>
   </div>
+  <div v-else>
+    Aucune tâche trouvée.
+  </div>
 </template>
+
 
 <script>
 import axios from 'axios';
@@ -17,18 +19,26 @@ export default {
       taches: [],
     };
   },
-  mounted() {
-    axios.get('/api/taches')
-      .then(response => {
-        this.taches = response.data;
-      })
-      .catch(error => {
-        console.error('Erreur lors de la requête API', error);
+  async mounted() {
+    try {
+      const employeeId = localStorage.getItem('employeeId');
+      const token = localStorage.getItem('userToken');
+      
+      if (!employeeId) {
+        throw new Error('employeeId non trouvé');
+      }
+
+      const response = await axios.get(`http://localhost:5138/api/Tasks/byEmployee/${employeeId}`, {
+      headers: {
+        'Authorization': `Bearer ${token}` // Inclut le token dans les en-têtes de la requête
+      }
       });
+      console.log(response.data); // Après avoir assigné les données à `this.taches`
+
+      this.taches = response.data;
+    } catch (error) {
+      console.error('Erreur lors de la requête API', error);
+    }
   },
 };
 </script>
-
-<style scoped>
-/* Styles spécifiques à ce composant ici */
-</style>

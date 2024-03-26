@@ -25,21 +25,25 @@ export default {
   methods: {
     async login() {
       try {
-        console.log("Données envoyées au serveur :", {
-          courriel: this.email,
-          motDePasse: this.password
-        });
-
-        const response = await axios.post('http://localhost:5138/api/authentification/login', {
+        const response = await axios.post('http://localhost:5138/api/authentication/login', {
           email: this.email,
           password: this.password
         });
 
-        console.log("Réponse du serveur :", response.data);
+        // Supposons que la réponse inclut un token et l'ID de l'employé
+        const { token, employeeId } = response.data;
+        if (token && employeeId) {
+          localStorage.setItem('userToken', token);
+          localStorage.setItem('employeeId', employeeId); // Stocke l'ID de l'employé
+          this.$router.push('/home');
+        } else {
+          console.error("Réponse inattendue du serveur");
+        }
       } catch (error) {
-        console.error('Erreur de connexion:', error);
+        console.error('Erreur de connexion:', error.response.data);
       }
     }
   }
 };
 </script>
+

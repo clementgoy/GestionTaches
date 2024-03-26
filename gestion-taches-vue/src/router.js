@@ -3,8 +3,10 @@ import Login from '@/views/LoginView.vue';
 import ResetPassword from '@/views/ResetPassword.vue';
 import RequestResetPage from '@/views/RequestResetPage.vue';
 import HomePage from '@/views/HomePage.vue';
-import ListeTaches from '@/views/ListeTachesView.vue';
-import ListeCongesView from '@/views/ListeCongesView.vue';
+import TasksListPage from '@/views/TasksListPage.vue';
+import HolidaysListPage from '@/views/HolidaysListPage.vue';
+import TaskDetails from '@/views/TaskDetailsPage.vue';
+import HolidayDetails from '@/views/HolidayDetailsPage.vue';
 
 const routes = [
   {
@@ -30,13 +32,21 @@ const routes = [
     name: 'Home', 
     component: HomePage 
   },
-  { path: '/taches', 
-    name: 'Taches', 
-    component: ListeTaches 
+  { path: '/tasks', 
+    name: 'Tasks', 
+    component: TasksListPage 
   },
-  { path: '/conges', 
-    name: 'Conges', 
-    component: ListeCongesView 
+  { path: '/holidays', 
+    name: 'Holidays', 
+    component: HolidaysListPage 
+  },
+  { path: '/task/:id', 
+    name: 'TaskDetails', 
+    component: TaskDetails 
+  },
+  { path: '/holiday/:id', 
+    name: 'HolidayDetails', 
+    component: HolidayDetails 
   },
 ];
 

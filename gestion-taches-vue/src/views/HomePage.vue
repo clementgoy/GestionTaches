@@ -3,8 +3,8 @@
     <h1>Bienvenue sur votre espace de travail</h1>
     <nav>
       <ul>
-        <li><router-link to="/taches">Ma liste de tâches</router-link></li>
-        <li><router-link to="/conges">Ma liste de congés</router-link></li>
+        <li><router-link to="/tasks">Ma liste de tâches</router-link></li>
+        <li><router-link to="/holidays">Ma liste de congés</router-link></li>
         <li><router-link to="/contact-manager">Contacter mon manager</router-link></li>
       </ul>
     </nav>

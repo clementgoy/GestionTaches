@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ListeTaches />
+    <TasksList />
   </div>
   <div>
     <LogoutButton/>
@@ -8,12 +8,12 @@
 </template>
 
 <script>
-import ListeTaches from '@/components/ListeTaches.vue';
 import LogoutButton from '@/components/LogoutButton.vue';
+import TasksList from '@/components/TasksList.vue';
 
 export default {
   components: {
-    ListeTaches,
+    TasksList,
     LogoutButton,
   },
 };

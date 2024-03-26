@@ -1,7 +1,7 @@
 <template>
-  <div class="list-conges">
+  <div class="holidays-list">
     <h1>Liste des Congés</h1>
-    <ListeConges />
+    <HolidaysList />
   </div>
   <div>
     <LogoutButton/>
@@ -9,12 +9,12 @@
 </template>
 
 <script>
-import ListeConges from '@/components/ListeConges.vue';
+import HolidaysList from '@/components/HolidaysList.vue';
 import LogoutButton from '@/components/LogoutButton';
 
 export default {
   components: {
-    ListeConges,
+    HolidaysList,
     LogoutButton,
   }
 };

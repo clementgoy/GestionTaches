@@ -14,6 +14,7 @@
 
 <script>
 import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
 
 export default {
   data() {
@@ -30,20 +31,29 @@ export default {
           password: this.password
         });
 
-        // Supposons que la réponse inclut un token et l'ID de l'employé
         const { token, employeeId } = response.data;
         if (token && employeeId) {
           localStorage.setItem('userToken', token);
-          localStorage.setItem('employeeId', employeeId); // Stocke l'ID de l'employé
-          this.$router.push('/home');
+          localStorage.setItem('employeeId', employeeId);
+
+          const decodedToken = jwtDecode(token);
+          console.log(decodedToken);
+
+          if (decodedToken.role === 'Manager') {
+            this.$router.push('/homepage-manager');
+          } else {
+            this.$router.push('/homepage-membre');
+          }
         } else {
           console.error("Réponse inattendue du serveur");
         }
       } catch (error) {
-        console.error('Erreur de connexion:', error.response.data);
+        console.error('Erreur de connexion:', error.response ? error.response.data : error);
       }
     }
   }
 };
+
 </script>
+
 

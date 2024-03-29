@@ -1,5 +1,7 @@
-<!-- Composant HolidayDetails.vue -->
 <template>
+  <div>
+    <BackButton/>
+  </div>
   <div>
     <div v-if="holiday">
       <h2>{{ holiday.reason }}</h2>
@@ -9,14 +11,23 @@
     <div v-else>
       Chargement des détails de la tâche...
     </div>
+    <div>
+      <LogoutButton/>
+    </div>
   </div>
 </template>
 
 
 <script>
 import axios from 'axios';
+import LogoutButton from '@/components/LogoutButton';
+import BackButton from '@/components/BackButton.vue';
 
 export default {
+  components: {
+    LogoutButton,
+    BackButton
+  },
   data() {
     return {
       holiday: null, 

@@ -42,7 +42,7 @@ export default {
       });
       console.log(response.data); // Après avoir assigné les données à `this.taches`
 
-      this.holidays = response.data;
+    this.holiday = response.data.sort((a, b) => new Date(a.date) - new Date(b.date));
     } catch (error) {
       console.error('Erreur lors de la requête API', error);
     }

@@ -42,7 +42,7 @@ export default {
       }
       });
 
-      this.tasks = response.data;
+      this.tasks = response.data.sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
     } catch (error) {
       console.error('Erreur lors de la requête API', error);
     }

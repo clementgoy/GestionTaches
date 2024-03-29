@@ -2,11 +2,17 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Login from '@/views/LoginView.vue';
 import ResetPassword from '@/views/ResetPassword.vue';
 import RequestResetPage from '@/views/RequestResetPage.vue';
-import HomePage from '@/views/HomePage.vue';
+import HomePageMembre from '@/views/HomePageMembre.vue';
 import TasksListPage from '@/views/TasksListPage.vue';
 import HolidaysListPage from '@/views/HolidaysListPage.vue';
 import TaskDetails from '@/views/TaskDetailsPage.vue';
 import HolidayDetails from '@/views/HolidayDetailsPage.vue';
+import HomePageManager from '@/views/HomePageManager.vue';
+import EmployeesManager from '@/views/EmployeesManager.vue';
+import HolidaysManager from '@/views/HolidaysManager.vue';
+import TasksManager from '@/views/TasksManager.vue';
+import AddEmployeeForm from '@/components/AddEmployeeForm.vue';
+import EditEmployee from '@/components/EditEmployee.vue';
 
 const routes = [
   {
@@ -28,9 +34,13 @@ const routes = [
     name: 'RequestReset',
     component: RequestResetPage,
   },
-  { path: '/home', 
-    name: 'Home', 
-    component: HomePage 
+  { path: '/homepage-membre', 
+    name: 'HomePageMemmbre', 
+    component: HomePageMembre 
+  },
+  { path: '/homepage-manager', 
+    name: 'HomePageManager', 
+    component: HomePageManager 
   },
   { path: '/tasks', 
     name: 'Tasks', 
@@ -47,6 +57,26 @@ const routes = [
   { path: '/holiday/:id', 
     name: 'HolidayDetails', 
     component: HolidayDetails 
+  },
+  { path: '/employees-manager', 
+    name: 'EmployeesManager', 
+    component: EmployeesManager, 
+  },
+  { path: '/holidays-manager', 
+    name: 'HolidaysManager', 
+    component: HolidaysManager, 
+  },
+  { path: '/tasks-manager', 
+    name: 'TasksManager', 
+    component: TasksManager, 
+  },
+  { path: '/add-employee', 
+    name: 'AddEmployeeForm', 
+    component: AddEmployeeForm, 
+  },
+  { path: '/edit-employee', 
+    name: 'EditEmployee', 
+    component: EditEmployee, 
   },
 ];
 

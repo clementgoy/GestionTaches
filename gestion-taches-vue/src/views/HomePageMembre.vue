@@ -1,4 +1,7 @@
 <template>
+  <div>
+    <BackButton/>
+  </div>
   <div class="home-page">
     <h1>Bienvenue sur votre espace de travail</h1>
     <nav>
@@ -13,12 +16,14 @@
 </template>
 
 <script>
-import LogoutButton from '@/components/LogoutButton' 
+import LogoutButton from '@/components/LogoutButton';
+import BackButton from '@/components/BackButton.vue';
 
 export default {
-  name: 'HomePage',
+  name: 'HomePageMembre',
   components: {
-    LogoutButton
+    LogoutButton,
+    BackButton,
   }
 };
 </script>

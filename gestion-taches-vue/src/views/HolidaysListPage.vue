@@ -1,4 +1,7 @@
 <template>
+  <div>
+    <BackButton/>
+  </div>
   <div class="holidays-list">
     <h1>Liste des Congés</h1>
     <HolidaysList />
@@ -11,11 +14,13 @@
 <script>
 import HolidaysList from '@/components/HolidaysList.vue';
 import LogoutButton from '@/components/LogoutButton';
+import BackButton from '@/components/BackButton.vue';
 
 export default {
   components: {
     HolidaysList,
     LogoutButton,
+    BackButton
   }
 };
 </script>

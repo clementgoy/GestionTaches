@@ -8,6 +8,7 @@
       <label for="password">Password:</label>
       <input type="password" v-model="password" required />
     </div>
+    <div v-if="errorMessage" class="error">{{ errorMessage }}</div>
     <button type="submit">Login</button>
   </form>
 </template>
@@ -20,7 +21,8 @@ export default {
   data() {
     return {
       email: '',
-      password: ''
+      password: '',
+      errorMessage: '',
     };
   },
   methods: {
@@ -49,11 +51,11 @@ export default {
         }
       } catch (error) {
         console.error('Erreur de connexion:', error.response ? error.response.data : error);
+        this.errorMessage = "Échec de l'authentification. Veuillez vérifier vos identifiants.";
       }
     }
   }
-};
-
+};  
 </script>
 
 

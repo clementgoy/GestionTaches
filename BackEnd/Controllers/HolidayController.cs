@@ -39,7 +39,7 @@ public class HolidayController : ControllerBase
         return new HolidayDTO(holiday);
     }
 
-    // GET : api/Holiday/byEmploye/{hashedId}
+    // GET : api/Holiday/byEmploye/{Id}
     [Authorize]
     [HttpGet("byEmployee/{idEmployee}")]
     public async Task<ActionResult<IEnumerable<HolidayDTO>>> GetHolidaysByEmployeeId(int idEmployee)

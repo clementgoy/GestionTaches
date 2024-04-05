@@ -5,12 +5,12 @@ using Microsoft.AspNetCore.Authorization;
 
 [ApiController]
 [Route("api/Tasks")]
-public class taskController : ControllerBase
+public class TaskController : ControllerBase
 {
     private readonly BackendContext _context;
 
     // Initializes the controller with the database context
-    public taskController(BackendContext context)
+    public TaskController(BackendContext context)
     {
         _context = context;
     }
@@ -28,7 +28,6 @@ public class taskController : ControllerBase
 
 
     // GET: api/task/2
-    [Authorize(Roles = "Manager")]
     [HttpGet("{id}")]
     public async Task<ActionResult<TaskDTO>> GetTask(int id)
     {

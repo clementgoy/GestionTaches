@@ -5,18 +5,18 @@ using Microsoft.AspNetCore.Authorization;
 
 
 [ApiController]
-[Route("api/employes")]
-public class EmployeController : ControllerBase
+[Route("api/employees")]
+public class EmployeeController : ControllerBase
 {
     private readonly BackendContext _context;
 
     // Injects the database context
-    public EmployeController(BackendContext context)
+    public EmployeeController(BackendContext context)
     {
         _context = context;
     }
 
-    // GET: api/employes
+    // GET: api/employees
     [Authorize(Roles = "Manager")]
     [HttpGet]
     public async Task<ActionResult<IEnumerable<EmployeeDTO>>> GetEmployees()
@@ -27,7 +27,7 @@ public class EmployeController : ControllerBase
         return await employees.ToListAsync();
     }
 
-    // GET: api/employe/2
+    // GET: api/employee/2
     [Authorize(Roles = "Manager")]
     [HttpGet("{id}")]
     public async Task<ActionResult<EmployeeDTO>> GetEmployee(int id)
@@ -41,10 +41,10 @@ public class EmployeController : ControllerBase
         return new EmployeeDTO(employee);
     }
 
-    // GET : api/employes/byTache/3
+    // GET : api/employees/byTask/3
     [Authorize(Roles = "Manager")]
-    [HttpGet("byTache/{idTask}")]
-    public async Task<ActionResult<IEnumerable<EmployeeDTO>>> GetEmployeesByTacheId(int idTask)
+    [HttpGet("byTask/{idTask}")]
+    public async Task<ActionResult<IEnumerable<EmployeeDTO>>> GetEmployeesByTaskId(int idTask)
     {
         // Fetches all assignments that match the given task ID
         var assignment = await _context.Assignments
@@ -68,7 +68,7 @@ public class EmployeController : ControllerBase
         return employees;
     }
 
-    // GET: api/employe/byEmail/2
+    // GET: api/employee/byEmail/2
     [HttpGet("byEmail{email}")]
     public async Task<ActionResult<EmployeeDTO>> GetEmployeeByEmail(string email)
     {
@@ -82,7 +82,7 @@ public class EmployeController : ControllerBase
     }
 
 
-    // POST: api/employe
+    // POST: api/employee
     [Authorize(Roles = "Manager")]
     [HttpPost]
     public async Task<ActionResult<Employee>> PostEmployee(EmployeePasswordDTO employeePasswordDTO)
@@ -117,7 +117,7 @@ public class EmployeController : ControllerBase
     }
 
 
-    // DELETE: api/employes/2
+    // DELETE: api/employees/2
     [Authorize(Roles = "Manager")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteEmployeeItem(int id)
@@ -139,7 +139,7 @@ public class EmployeController : ControllerBase
     }
 
 
-    // PUT: api/employe/2
+    // PUT: api/employee/2
     [Authorize(Roles = "Manager")]
     [HttpPut("{id}")]
     public async Task<IActionResult> PutEmployee(int id, EmployeeDTO employeDTO)

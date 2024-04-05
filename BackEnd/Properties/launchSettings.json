@@ -4,13 +4,13 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:21181",
+      "applicationUrl": "http://localhost:5138",
       "sslPort": 44306
-    }
+    } 
   },
   "profiles": {
     "http": {
-      "commandName": "Project",
+      "commandName": "Project", 
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "swagger",

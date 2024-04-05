@@ -53,7 +53,7 @@ public class AuthenticationController : ControllerBase
                 new Claim(ClaimTypes.Name, user.Email),
                 new Claim(ClaimTypes.Role, role)
             }),
-            Expires = DateTime.UtcNow.AddDays(2),
+            Expires = DateTime.UtcNow.AddHours(9),
             SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature),
             Audience = _configuration["Jwt:Audience"],
             Issuer = _configuration["Jwt:Issuer"],
@@ -62,6 +62,6 @@ public class AuthenticationController : ControllerBase
         var token = tokenHandler.CreateToken(tokenDescriptor);
         var tokenString = tokenHandler.WriteToken(token);
 
-        return Ok(new { Token = tokenString });
+        return Ok(new { Token = tokenString, employeeId = user.Id });
     }
 }
